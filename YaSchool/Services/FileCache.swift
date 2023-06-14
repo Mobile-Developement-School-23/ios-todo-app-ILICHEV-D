@@ -23,10 +23,12 @@ class FileCache {
     
     private var todoItems: [TodoItem]
     private let filename: String
+    private let fileType: FileType
     
-    init(filename: String) {
+    init(filename: String, fileType: FileType) {
         self.filename = filename
         self.todoItems = []
+        self.fileType = fileType
         loadFromFile()
     }
     
@@ -49,6 +51,26 @@ class FileCache {
     }
     
     private func saveToFile() {
+        switch fileType {
+        case .json:
+            saveJSONToFile()
+        case .csv:
+            saveCSVToFile()
+        }
+    }
+    
+    private func loadFromFile() {
+        switch fileType {
+        case .json:
+            loadJSONFromFile()
+        case .csv:
+            loadCSVFromFile()
+        }
+    }
+    
+    // MARK: - JSON Handling
+    
+    private func saveJSONToFile() {
         let json = todoItems.map { $0.json }
         if let url = fileURL() {
             do {
@@ -60,7 +82,7 @@ class FileCache {
         }
     }
     
-    private func loadFromFile() {
+    private func loadJSONFromFile() {
         if let url = fileURL() {
             do {
                 let data = try Data(contentsOf: url)
@@ -71,7 +93,31 @@ class FileCache {
                     return
                 }
             } catch {
-                saveToFile()
+                saveJSONToFile()
+            }
+        }
+    }
+    
+    // MARK: - CSV Handling
+    
+    private func saveCSVToFile() {
+        let csvString = todoItems.map { $0.toCSV() }.joined(separator: "\n")
+        if let url = fileURL() {
+            do {
+                try csvString.write(to: url, atomically: true, encoding: .utf8)
+            } catch {
+                print("Failed to save data: \(error)")
+            }
+        }
+    }
+    
+    private func loadCSVFromFile() {
+        if let url = fileURL() {
+            do {
+                let csvString = try String(contentsOf: url, encoding: .utf8)
+                todoItems = TodoItem.parseCSV(csvString: csvString)
+            } catch {
+                saveCSVToFile()
             }
         }
     }
@@ -80,4 +126,11 @@ class FileCache {
         FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent(filename)
     }
     
+}
+
+// MARK: Helpers
+
+enum FileType {
+    case json
+    case csv
 }

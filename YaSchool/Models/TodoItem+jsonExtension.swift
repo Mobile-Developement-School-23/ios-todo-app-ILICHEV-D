@@ -76,7 +76,6 @@ extension TodoItem {
             jsonDict["modificationDate"] = ISO8601DateFormatter().string(from: modificationDate)
         }
         return jsonDict
-        
     }
     
 }

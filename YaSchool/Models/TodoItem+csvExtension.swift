@@ -61,4 +61,22 @@ extension TodoItem {
         return todoItems
     }
     
+    func toCSV() -> String {
+        var csvString = "\(id),\(text),\(importance.rawValue),"
+        
+        if let deadline = deadline {
+            csvString += "\(ISO8601DateFormatter().string(from: deadline)),"
+        } else {
+            csvString += ","
+        }
+        
+        csvString += "\(isDone),\(ISO8601DateFormatter().string(from: creationDate)),"
+        
+        if let modificationDate = modificationDate {
+            csvString += "\(ISO8601DateFormatter().string(from: modificationDate))"
+        }
+        
+        return csvString
+    }
+    
 }
