@@ -77,12 +77,16 @@ final class TodoItemTests: XCTestCase {
     }
     
     func testTodoItemSerializationToJSON() {
+        guard let creationDate = ISO8601DateFormatter().date(from: "2023-06-10T12:00:00Z") else {
+            XCTFail("Fail of creation of date")
+            return
+        }
+        
         let id = "1"
         let text = "text"
         let importance = Importance.normal
         let deadline = ISO8601DateFormatter().date(from: "2023-08-10T12:00:00Z")
         let isDone = false
-        let creationDate = ISO8601DateFormatter().date(from: "2023-06-10T12:00:00Z")!
         let modificationDate = ISO8601DateFormatter().date(from: "2023-07-10T12:00:00Z")
         
         let todoItem = TodoItem(
@@ -135,6 +139,59 @@ final class TodoItemTests: XCTestCase {
         XCTAssertEqual(todoItemSecond.isDone, true)
         XCTAssertEqual(todoItemSecond.creationDate, ISO8601DateFormatter().date(from: "2023-06-10T12:00:00Z"))
         XCTAssertEqual(todoItemSecond.modificationDate, ISO8601DateFormatter().date(from: "2023-07-10T12:00:00Z"))
+    }
+    
+    func testTodoItemCSVProcessing() {
+        guard let creationDate = ISO8601DateFormatter().date(from: "2023-06-10T12:00:00Z") else {
+            XCTFail("Fail of creation of date")
+            return
+        }
+        
+        let todoItemFirst = TodoItem(
+            id: "1",
+            text: "First",
+            importance: .normal,
+            deadline: nil,
+            isDone: false,
+            creationDate: creationDate,
+            modificationDate: nil
+        )
+        
+        let todoItemSecond = TodoItem(
+            id: "2",
+            text: "Second",
+            importance: .high,
+            deadline: ISO8601DateFormatter().date(from: "2023-08-10T12:00:00Z"),
+            isDone: true,
+            creationDate: creationDate,
+            modificationDate: ISO8601DateFormatter().date(from: "2023-07-10T12:00:00Z")
+        )
+        
+        let todoItems = [todoItemFirst, todoItemSecond]
+        
+        let csvString = todoItems.map { $0.toCSV() }.joined(separator: "\n")
+        
+        let parsedTodoItems = TodoItem.parseCSV(csvString: csvString)
+        
+        XCTAssertEqual(parsedTodoItems.count, 2)
+        
+        let parsedTodoItemFirst = parsedTodoItems[0]
+        XCTAssertEqual(parsedTodoItemFirst.id, "1")
+        XCTAssertEqual(parsedTodoItemFirst.text, "First")
+        XCTAssertEqual(parsedTodoItemFirst.importance, Importance.normal)
+        XCTAssertNil(parsedTodoItemFirst.deadline)
+        XCTAssertEqual(parsedTodoItemFirst.isDone, false)
+        XCTAssertEqual(parsedTodoItemFirst.creationDate, ISO8601DateFormatter().date(from: "2023-06-10T12:00:00Z"))
+        XCTAssertNil(parsedTodoItemFirst.modificationDate)
+        
+        let parsedTodoItemSecond = parsedTodoItems[1]
+        XCTAssertEqual(parsedTodoItemSecond.id, "2")
+        XCTAssertEqual(parsedTodoItemSecond.text, "Second")
+        XCTAssertEqual(parsedTodoItemSecond.importance, Importance.high)
+        XCTAssertEqual(parsedTodoItemSecond.deadline, ISO8601DateFormatter().date(from: "2023-08-10T12:00:00Z"))
+        XCTAssertEqual(parsedTodoItemSecond.isDone, true)
+        XCTAssertEqual(parsedTodoItemSecond.creationDate, ISO8601DateFormatter().date(from: "2023-06-10T12:00:00Z"))
+        XCTAssertEqual(parsedTodoItemSecond.modificationDate, ISO8601DateFormatter().date(from: "2023-07-10T12:00:00Z"))
     }
     
 }
