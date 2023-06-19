@@ -14,13 +14,15 @@ import Foundation
 extension TodoItem {
     
     static func parse(json: Any) -> TodoItem? {
+        let dateFormatter = ISO8601DateFormatter()
+
         guard let jsonData = try? JSONSerialization.data(withJSONObject: json),
               let jsonDict = try? JSONSerialization.jsonObject(with: jsonData) as? [String: Any],
               let id = jsonDict["id"] as? String,
               let text = jsonDict["text"] as? String,
               let isDone = jsonDict["isDone"] as? Bool,
               let creationDateString = jsonDict["creationDate"] as? String,
-              let creationDate = ISO8601DateFormatter().date(from: creationDateString)
+              let creationDate = dateFormatter.date(from: creationDateString)
         else {
             return nil
         }
@@ -35,14 +37,14 @@ extension TodoItem {
         
         let deadline: Date? = {
             if let deadlineString = jsonDict["deadline"] as? String {
-                return ISO8601DateFormatter().date(from: deadlineString)
+                return dateFormatter.date(from: deadlineString)
             }
             return nil
         }()
         
         let modificationDate: Date? = {
             if let modificationDateString = jsonDict["modificationDate"] as? String {
-                return ISO8601DateFormatter().date(from: modificationDateString)
+                return dateFormatter.date(from: modificationDateString)
             }
             return nil
         }()
@@ -59,21 +61,23 @@ extension TodoItem {
     }
     
     var json: Any {
+        let dateFormatter = ISO8601DateFormatter()
+
         var jsonDict: [String: Any] = [
             "id": id,
             "text": text,
             "isDone": isDone,
-            "creationDate": ISO8601DateFormatter().string(from: creationDate)
+            "creationDate": dateFormatter.string(from: creationDate)
         ]
         
         if importance != .normal {
             jsonDict["importance"] = importance.rawValue
         }
         if let deadline = deadline {
-            jsonDict["deadline"] = ISO8601DateFormatter().string(from: deadline)
+            jsonDict["deadline"] = dateFormatter.string(from: deadline)
         }
         if let modificationDate = modificationDate {
-            jsonDict["modificationDate"] = ISO8601DateFormatter().string(from: modificationDate)
+            jsonDict["modificationDate"] = dateFormatter.string(from: modificationDate)
         }
         return jsonDict
     }

@@ -31,7 +31,7 @@ final class TodoItemTests: XCTestCase {
         XCTAssertEqual(todoItem.modificationDate, modificationDate)
     }
     
-    func testTodoItemParsingFromJSON() {
+    func testTodoItemParsingFromJSON() throws {
         let json: [String: Any] = [
             "id": "1",
             "text": "text",
@@ -42,11 +42,8 @@ final class TodoItemTests: XCTestCase {
             "modificationDate": "2023-07-10T12:00:00Z"
         ]
         
-        guard let todoItem = TodoItem.parse(json: json) else {
-            XCTFail("Fail of parsing TodoItem")
-            return
-        }
-        
+        let todoItem = try XCTUnwrap(TodoItem.parse(json: json))
+         
         XCTAssertEqual(todoItem.id, "1")
         XCTAssertEqual(todoItem.text, "text")
         XCTAssertEqual(todoItem.importance, Importance.high)
@@ -56,7 +53,7 @@ final class TodoItemTests: XCTestCase {
         XCTAssertEqual(todoItem.modificationDate, ISO8601DateFormatter().date(from: "2023-07-10T12:00:00Z"))
     }
     
-    func testTodoItemParsingFromJSONWithoutImportanceAndOptionalValues() {
+    func testTodoItemParsingFromJSONWithoutImportanceAndOptionalValues() throws {
         let json: [String: Any] = [
             "id": "1",
             "text": "text",
@@ -64,10 +61,7 @@ final class TodoItemTests: XCTestCase {
             "creationDate": "2023-06-10T12:00:00Z",
         ]
         
-        guard let todoItem = TodoItem.parse(json: json) else {
-            XCTFail("Fail of parsing TodoItem")
-            return
-        }
+        let todoItem = try XCTUnwrap(TodoItem.parse(json: json))
         
         XCTAssertEqual(todoItem.id, "1")
         XCTAssertEqual(todoItem.text, "text")
@@ -76,11 +70,8 @@ final class TodoItemTests: XCTestCase {
         XCTAssertEqual(todoItem.creationDate, ISO8601DateFormatter().date(from: "2023-06-10T12:00:00Z"))
     }
     
-    func testTodoItemSerializationToJSON() {
-        guard let creationDate = ISO8601DateFormatter().date(from: "2023-06-10T12:00:00Z") else {
-            XCTFail("Fail of creation of date")
-            return
-        }
+    func testTodoItemSerializationToJSON() throws {
+        let creationDate = try XCTUnwrap(ISO8601DateFormatter().date(from: "2023-06-10T12:00:00Z"))
         
         let id = "1"
         let text = "text"

@@ -19,9 +19,9 @@ import Foundation
  - We can have several different files
  - Provide a mechanism to protect against duplication of tasks (by comparing IDs)
  */
-class FileCache {
+final class FileCache {
     
-    private var todoItems: [TodoItem]
+    private(set) var todoItems: [TodoItem]
     private let filename: String
     private let fileType: FileType
     
@@ -32,11 +32,7 @@ class FileCache {
         loadFromFile()
     }
     
-    var allTodoItems: [TodoItem] {
-        return todoItems
-    }
-    
-    func addTodoItem(_ todoItem: TodoItem) {
+    func add(todoItem: TodoItem) {
         if let index = todoItems.firstIndex(where: { $0.id == todoItem.id }) {
             todoItems[index] = todoItem
         } else {
@@ -71,54 +67,54 @@ class FileCache {
     // MARK: - JSON Handling
     
     private func saveJSONToFile() {
+        guard let url = fileURL() else { return }
+        
         let json = todoItems.map { $0.json }
-        if let url = fileURL() {
-            do {
-                let data = try JSONSerialization.data(withJSONObject: json)
-                try data.write(to: url)
-            } catch {
-                print("Failed to save data: \(error)")
-            }
+        do {
+            let data = try JSONSerialization.data(withJSONObject: json)
+            try data.write(to: url)
+        } catch {
+            print("Failed to save data: \(error)")
         }
     }
     
     private func loadJSONFromFile() {
-        if let url = fileURL() {
-            do {
-                let data = try Data(contentsOf: url)
-                let json = try JSONSerialization.jsonObject(with: data)
-                if let jsonArray = json as? [Any] {
-                    todoItems = jsonArray.compactMap { TodoItem.parse(json: $0) }
-                } else {
-                    return
-                }
-            } catch {
-                saveJSONToFile()
+        guard let url = fileURL() else { return }
+        
+        do {
+            let data = try Data(contentsOf: url)
+            let json = try JSONSerialization.jsonObject(with: data)
+            if let jsonArray = json as? [Any] {
+                todoItems = jsonArray.compactMap { TodoItem.parse(json: $0) }
+            } else {
+                return
             }
+        } catch {
+            saveJSONToFile()
         }
     }
     
     // MARK: - CSV Handling
     
     private func saveCSVToFile() {
+        guard let url = fileURL() else { return }
+        
         let csvString = todoItems.map { $0.toCSV() }.joined(separator: "\n")
-        if let url = fileURL() {
-            do {
-                try csvString.write(to: url, atomically: true, encoding: .utf8)
-            } catch {
-                print("Failed to save data: \(error)")
-            }
+        do {
+            try csvString.write(to: url, atomically: true, encoding: .utf8)
+        } catch {
+            print("Failed to save data: \(error)")
         }
     }
     
     private func loadCSVFromFile() {
-        if let url = fileURL() {
-            do {
-                let csvString = try String(contentsOf: url, encoding: .utf8)
-                todoItems = TodoItem.parseCSV(csvString: csvString)
-            } catch {
-                saveCSVToFile()
-            }
+        guard let url = fileURL() else { return }
+        
+        do {
+            let csvString = try String(contentsOf: url, encoding: .utf8)
+            todoItems = TodoItem.parseCSV(csvString: csvString)
+        } catch {
+            saveCSVToFile()
         }
     }
     
