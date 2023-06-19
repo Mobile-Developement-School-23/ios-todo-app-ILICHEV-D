@@ -16,8 +16,7 @@ extension TodoItem {
     static func parse(json: Any) -> TodoItem? {
         let dateFormatter = ISO8601DateFormatter()
 
-        guard let jsonData = try? JSONSerialization.data(withJSONObject: json),
-              let jsonDict = try? JSONSerialization.jsonObject(with: jsonData) as? [String: Any],
+        guard let jsonDict = json as? [String: Any],
               let id = jsonDict["id"] as? String,
               let text = jsonDict["text"] as? String,
               let isDone = jsonDict["isDone"] as? Bool,
