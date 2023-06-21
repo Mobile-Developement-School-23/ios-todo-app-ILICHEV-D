@@ -19,7 +19,8 @@ import Foundation
  - We can have several different files
  - Provide a mechanism to protect against duplication of tasks (by comparing IDs)
  */
-final class FileCache {
+
+class FileCache: FileCacheType {
     
     private(set) var todoItems: [TodoItem]
     private let filename: String
@@ -32,7 +33,7 @@ final class FileCache {
         loadFromFile()
     }
     
-    func add(todoItem: TodoItem) {
+    func addTodoItem(_ todoItem: TodoItem) {
         if let index = todoItems.firstIndex(where: { $0.id == todoItem.id }) {
             todoItems[index] = todoItem
         } else {
