@@ -14,10 +14,12 @@ class TaskDetailsViewController: UIViewController {
     private let contentView = makeContentView()
     private let textView = makeTextView()
     private let importanceLabel = makeImportanceLabel()
+    private let colorPickerLabel = makeColorPickerLabel()
     private let containerView = makeContainerView()
     private let importanceSegmentedControl = makeImportanceSegmentedControl()
     private let divider1 = makeDivider()
     private let divider2 = makeDivider()
+    private let divider3 = makeDivider()
     private let deadlineLabel = makeDeadlineLabel()
     private let deadlineSubtitleLabel = makeDeadlineSubtitleLabel()
     private let deadlineSwitch = makeDeadlineSwitch()
@@ -48,7 +50,9 @@ extension TaskDetailsViewController: TaskDetailsViewInput {
     
     func configure(_ model: TodoItem?) {
         if let model = model {
+            placeholderLabel.isHidden = true
             textView.text = model.text
+            textView.textColor = model.color?.colorFromHexString() ?? .label
             importanceSegmentedControl.selectedSegmentIndex = model.importance.index
             if let deadline = model.deadline {
                 deadlinePicker.date = deadline
@@ -64,6 +68,11 @@ extension TaskDetailsViewController: TaskDetailsViewInput {
             deadlinePicker.date = Date.tomorrow
         }
         deadlineSwitchValueChanged()
+    }
+    
+    func colorText(_ hextString: String) {
+        textView.textColor = hextString.colorFromHexString() ?? .label
+        
     }
     
 }
@@ -139,6 +148,16 @@ private extension TaskDetailsViewController {
         
         containerView.addArrangedSubview(divider1)
         
+        let colorPickerLine = UIView()
+        colorPickerLine.translatesAutoresizingMaskIntoConstraints = false
+        containerView.addArrangedSubview(colorPickerLine)
+        colorPickerLine.addSubview(colorPickerLabel)
+        colorPickerLine.isUserInteractionEnabled = true
+        let tapColorPickerGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapColorPicker))
+        colorPickerLine.addGestureRecognizer(tapColorPickerGestureRecognizer)
+        
+        containerView.addArrangedSubview(divider2)
+        
         let secondLine = UIView()
         secondLine.translatesAutoresizingMaskIntoConstraints = false
         containerView.addArrangedSubview(secondLine)
@@ -155,7 +174,7 @@ private extension TaskDetailsViewController {
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapSecondLine))
         secondLine.addGestureRecognizer(tapGestureRecognizer)
         
-        containerView.addArrangedSubview(divider2)
+        containerView.addArrangedSubview(divider3)
         deadlinePickerContainer.addSubview(deadlinePicker)
         containerView.addArrangedSubview(deadlinePickerContainer)
         
@@ -165,6 +184,10 @@ private extension TaskDetailsViewController {
             importanceLabel.leadingAnchor.constraint(equalTo: firstLine.leadingAnchor, constant: padding),
             importanceSegmentedControl.centerYAnchor.constraint(equalTo: firstLine.centerYAnchor),
             importanceSegmentedControl.trailingAnchor.constraint(equalTo: firstLine.trailingAnchor, constant: -padding),
+            
+            colorPickerLine.heightAnchor.constraint(equalToConstant: 56),
+            colorPickerLabel.centerYAnchor.constraint(equalTo: colorPickerLine.centerYAnchor),
+            colorPickerLabel.leadingAnchor.constraint(equalTo: colorPickerLine.leadingAnchor, constant: padding),
             
             secondLine.heightAnchor.constraint(equalToConstant: 56),
             labelStackView.centerYAnchor.constraint(equalTo: secondLine.centerYAnchor),
@@ -216,8 +239,8 @@ private extension TaskDetailsViewController {
             deleteButton.heightAnchor.constraint(equalToConstant: 56),
             
             freeSpace.topAnchor.constraint(equalTo: deleteButton.bottomAnchor),
-            freeSpace.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: padding),
-            freeSpace.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -padding),
+            freeSpace.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            freeSpace.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             freeSpace.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
     }
@@ -249,7 +272,7 @@ private extension TaskDetailsViewController {
     
     private func changeDatePickerVisibility() {
         let shouldShowAnimation = isCalendarAvailable == deadlinePickerContainer.isHidden
-        [deadlinePickerContainer, divider2].forEach {
+        [deadlinePickerContainer, divider3].forEach {
             $0.isHidden = !isCalendarAvailable
         }
         
@@ -278,7 +301,8 @@ private extension TaskDetailsViewController {
         output.saveButtonTapped(
             text: textView.text,
             importance: importanceSegmentedControl.selectedSegmentIndex.importance,
-            deadline: deadlineSwitch.isOn ? deadlinePicker.date : nil
+            deadline: deadlineSwitch.isOn ? deadlinePicker.date : nil,
+            color: textView.textColor == .label ? nil : textView.textColor?.hexString
         )
         endEditing()
     }
@@ -289,6 +313,11 @@ private extension TaskDetailsViewController {
         changeDatePickerVisibility()
         updateDeadlineSubtitle()
         endEditing()
+    }
+    
+    @objc
+    func didTapColorPicker() {
+        output.colorPickerTapped()
     }
     
     @objc
@@ -364,6 +393,13 @@ private extension TaskDetailsViewController {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Важность"
+        return label
+    }
+    
+    static func makeColorPickerLabel() -> UILabel {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Выбрать цвет"
         return label
     }
     

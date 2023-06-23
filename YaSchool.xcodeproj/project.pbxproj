@@ -32,6 +32,12 @@
 		ADDB0D5D2A3F013E00A8BEBD /* FileCacheType.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADDB0D5A2A3F013E00A8BEBD /* FileCacheType.swift */; };
 		ADDB0D5E2A3F013E00A8BEBD /* FileCacheAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADDB0D5B2A3F013E00A8BEBD /* FileCacheAssembly.swift */; };
 		ADDB0D5F2A3F013E00A8BEBD /* FileCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADDB0D5C2A3F013E00A8BEBD /* FileCache.swift */; };
+		ADFF77B32A4336C6001F3F31 /* UIColor+extenstions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADFF77B22A4336C6001F3F31 /* UIColor+extenstions.swift */; };
+		ADFF77C12A43371C001F3F31 /* ColorPickerAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADFF77B82A43371C001F3F31 /* ColorPickerAssembly.swift */; };
+		ADFF77C22A43371C001F3F31 /* ColorPickerContracts.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADFF77BA2A43371C001F3F31 /* ColorPickerContracts.swift */; };
+		ADFF77C32A43371C001F3F31 /* ColorPickerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADFF77BC2A43371C001F3F31 /* ColorPickerPresenter.swift */; };
+		ADFF77C42A43371C001F3F31 /* ColorPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADFF77BE2A43371C001F3F31 /* ColorPickerViewController.swift */; };
+		ADFF77C92A4347A3001F3F31 /* String+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADFF77C82A4347A3001F3F31 /* String+extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,6 +84,12 @@
 		ADDB0D5A2A3F013E00A8BEBD /* FileCacheType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileCacheType.swift; sourceTree = "<group>"; };
 		ADDB0D5B2A3F013E00A8BEBD /* FileCacheAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileCacheAssembly.swift; sourceTree = "<group>"; };
 		ADDB0D5C2A3F013E00A8BEBD /* FileCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileCache.swift; sourceTree = "<group>"; };
+		ADFF77B22A4336C6001F3F31 /* UIColor+extenstions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+extenstions.swift"; sourceTree = "<group>"; };
+		ADFF77B82A43371C001F3F31 /* ColorPickerAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPickerAssembly.swift; sourceTree = "<group>"; };
+		ADFF77BA2A43371C001F3F31 /* ColorPickerContracts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPickerContracts.swift; sourceTree = "<group>"; };
+		ADFF77BC2A43371C001F3F31 /* ColorPickerPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPickerPresenter.swift; sourceTree = "<group>"; };
+		ADFF77BE2A43371C001F3F31 /* ColorPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPickerViewController.swift; sourceTree = "<group>"; };
+		ADFF77C82A4347A3001F3F31 /* String+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +121,8 @@
 			isa = PBXGroup;
 			children = (
 				AD3E75A52A3F2CC300985ECA /* Date+extensions.swift */,
+				ADFF77B22A4336C6001F3F31 /* UIColor+extenstions.swift */,
+				ADFF77C82A4347A3001F3F31 /* String+extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -188,6 +202,7 @@
 		ADDB0D332A3EF8B300A8BEBD /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				ADFF77B62A43371C001F3F31 /* ColorPicker */,
 				ADDB0D342A3EF8D600A8BEBD /* TaskDetails */,
 			);
 			path = Modules;
@@ -271,6 +286,49 @@
 				ADDB0D5C2A3F013E00A8BEBD /* FileCache.swift */,
 			);
 			path = FileCache;
+			sourceTree = "<group>";
+		};
+		ADFF77B62A43371C001F3F31 /* ColorPicker */ = {
+			isa = PBXGroup;
+			children = (
+				ADFF77B72A43371C001F3F31 /* Assembly */,
+				ADFF77B92A43371C001F3F31 /* Contracts */,
+				ADFF77BB2A43371C001F3F31 /* Presenter */,
+				ADFF77BD2A43371C001F3F31 /* View */,
+			);
+			path = ColorPicker;
+			sourceTree = "<group>";
+		};
+		ADFF77B72A43371C001F3F31 /* Assembly */ = {
+			isa = PBXGroup;
+			children = (
+				ADFF77B82A43371C001F3F31 /* ColorPickerAssembly.swift */,
+			);
+			path = Assembly;
+			sourceTree = "<group>";
+		};
+		ADFF77B92A43371C001F3F31 /* Contracts */ = {
+			isa = PBXGroup;
+			children = (
+				ADFF77BA2A43371C001F3F31 /* ColorPickerContracts.swift */,
+			);
+			path = Contracts;
+			sourceTree = "<group>";
+		};
+		ADFF77BB2A43371C001F3F31 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				ADFF77BC2A43371C001F3F31 /* ColorPickerPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		ADFF77BD2A43371C001F3F31 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				ADFF77BE2A43371C001F3F31 /* ColorPickerViewController.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -407,18 +465,24 @@
 				AD69078D2A34946500E32AEA /* AppDelegate.swift in Sources */,
 				ADDB0D4C2A3EF8F600A8BEBD /* TaskCoordinator.swift in Sources */,
 				AD6907BE2A349D2700E32AEA /* TodoItem.swift in Sources */,
+				ADFF77C92A4347A3001F3F31 /* String+extensions.swift in Sources */,
 				ADDB0D432A3EF8D600A8BEBD /* TaskDetailsInteractor.swift in Sources */,
 				ADDB0D5E2A3F013E00A8BEBD /* FileCacheAssembly.swift in Sources */,
 				AD69078F2A34946500E32AEA /* SceneDelegate.swift in Sources */,
+				ADFF77C32A43371C001F3F31 /* ColorPickerPresenter.swift in Sources */,
 				ADDB0D5F2A3F013E00A8BEBD /* FileCache.swift in Sources */,
 				AD5831392A34B6B500EBFDD4 /* TodoItem+csvExtension.swift in Sources */,
 				ADDB0D552A3EFB0300A8BEBD /* CoordinateType.swift in Sources */,
 				ADDB0D402A3EF8D600A8BEBD /* TaskDetailsContracts.swift in Sources */,
 				ADDB0D3F2A3EF8D600A8BEBD /* TaskDetailsAssembly.swift in Sources */,
+				ADFF77C42A43371C001F3F31 /* ColorPickerViewController.swift in Sources */,
 				ADDB0D5D2A3F013E00A8BEBD /* FileCacheType.swift in Sources */,
 				AD3E75A62A3F2CC300985ECA /* Date+extensions.swift in Sources */,
+				ADFF77C22A43371C001F3F31 /* ColorPickerContracts.swift in Sources */,
+				ADFF77B32A4336C6001F3F31 /* UIColor+extenstions.swift in Sources */,
 				ADDB0D412A3EF8D600A8BEBD /* TaskDetailsPresenter.swift in Sources */,
 				ADDB0D4E2A3EF8F600A8BEBD /* TaskCoordinatorType.swift in Sources */,
+				ADFF77C12A43371C001F3F31 /* ColorPickerAssembly.swift in Sources */,
 				ADDB0D422A3EF8D600A8BEBD /* TaskDetailsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

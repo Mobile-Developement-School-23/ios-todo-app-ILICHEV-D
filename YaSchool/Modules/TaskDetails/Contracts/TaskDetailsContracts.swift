@@ -1,34 +1,29 @@
 import Foundation
 
-// Module Input
 protocol TaskDetailsModuleInput {
-    
+    func setHexColor(hexString: String)
 }
 
-// Module Output
 protocol TaskDetailsModuleOutput {
-    
+    func didAskToShowColorPicker()
 }
 
-// View Input
-protocol TaskDetailsViewInput {
+protocol TaskDetailsViewInput: AnyObject {
     func configure(_ model: TodoItem?)
+    func colorText(_ hextString: String)
 }
 
-// View Output
 protocol TaskDetailsViewOutput {
-    
     func viewDidLoad()
     
     func deleteButtonTapped()
-    func saveButtonTapped(text: String, importance: Importance, deadline: Date?)
+    func saveButtonTapped(text: String, importance: Importance, deadline: Date?, color: String?)
     func cancelButtonTapped()
+    func colorPickerTapped()
     
 }
 
-// Interactor
 protocol TaskDetailsInteractorInput {
-    
     func obtainRandomTask() -> TodoItem?
     func deleteTask(todoItem: TodoItem)
     func saveTask(todoItem: TodoItem)

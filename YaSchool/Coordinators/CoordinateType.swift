@@ -3,6 +3,6 @@ import UIKit
 
 protocol CoordinatorType {
     
-    func build() -> UINavigationController
+    func build() -> UINavigationController?
     
 }

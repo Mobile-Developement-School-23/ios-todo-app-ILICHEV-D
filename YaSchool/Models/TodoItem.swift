@@ -19,6 +19,7 @@ struct TodoItem {
     let isDone: Bool
     let creationDate: Date
     let modificationDate: Date?
+    var color: String?
     
     init(
         id: String = UUID().uuidString,
@@ -27,7 +28,8 @@ struct TodoItem {
         deadline: Date?,
         isDone: Bool,
         creationDate: Date,
-        modificationDate: Date? = nil
+        modificationDate: Date? = nil,
+        color: String? = nil
     ) {
         self.id = id
         self.text = text
@@ -36,6 +38,7 @@ struct TodoItem {
         self.isDone = isDone
         self.creationDate = creationDate
         self.modificationDate = modificationDate
+        self.color = color
     }
 }
 

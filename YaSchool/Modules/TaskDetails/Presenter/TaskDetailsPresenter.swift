@@ -3,7 +3,7 @@ import Foundation
 class TaskDetailsPresenter {
     
     // MARK: - Weak properties
-    var view: TaskDetailsViewInput?
+    weak var view: TaskDetailsViewInput?
     
     var interactor: TaskDetailsInteractorInput?
     var output: TaskDetailsModuleOutput?
@@ -18,6 +18,10 @@ extension TaskDetailsPresenter {
 
 // MARK: Module Input
 extension TaskDetailsPresenter: TaskDetailsModuleInput {
+    
+    func setHexColor(hexString: String) {
+        view?.colorText(hexString)
+    }
     
 }
 
@@ -35,12 +39,17 @@ extension TaskDetailsPresenter: TaskDetailsViewOutput {
         loadData()
     }
     
-    func cancelButtonTapped() { }
-    
-    func saveButtonTapped(text: String, importance: Importance, deadline: Date?) {
-        interactor?.saveTask(todoItem: TodoItem(text: text, importance: importance, deadline: deadline, isDone: false, creationDate: Date()))
+    func saveButtonTapped(text: String, importance: Importance, deadline: Date?, color: String?) {
+        interactor?.saveTask(todoItem: TodoItem(text: text, importance: importance, deadline: deadline, isDone: false, creationDate: Date(), color: color))
         loadData()
     }
+    
+    func colorPickerTapped() {
+        output?.didAskToShowColorPicker()
+    }
+    
+    func cancelButtonTapped() {}
+    
 }
 
 private extension TaskDetailsPresenter {
