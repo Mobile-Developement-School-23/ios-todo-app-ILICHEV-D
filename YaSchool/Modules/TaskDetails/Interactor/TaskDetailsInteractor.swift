@@ -23,7 +23,7 @@ extension TaskDetailsInteractor {
     }
     
     func saveTask(todoItem: TodoItem) {
-        fileCashe.addTodoItem(todoItem)
+        fileCashe.add(todoItem: todoItem)
     }
     
 }
