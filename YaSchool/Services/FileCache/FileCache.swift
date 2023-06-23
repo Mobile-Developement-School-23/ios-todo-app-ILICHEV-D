@@ -19,7 +19,9 @@ import Foundation
  - We can have several different files
  - Provide a mechanism to protect against duplication of tasks (by comparing IDs)
  */
-final class FileCache {
+
+
+final class FileCache: FileCacheType {
     
     private(set) var todoItems: [TodoItem]
     private let filename: String
