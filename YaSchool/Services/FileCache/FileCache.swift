@@ -34,7 +34,7 @@ final class FileCache: FileCacheType {
         loadFromFile()
     }
     
-    func addTodoItem(_ todoItem: TodoItem) {
+    func add(todoItem: TodoItem) {
         if let index = todoItems.firstIndex(where: { $0.id == todoItem.id }) {
             todoItems[index] = todoItem
         } else {
