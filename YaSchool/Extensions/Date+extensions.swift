@@ -1,8 +1,7 @@
 import Foundation
 
-
 public extension Date {
-    
+
     static var tomorrow: Date {
         let calendar = Calendar.current
         let today = Date()
@@ -12,5 +11,5 @@ public extension Date {
         }
         return today
     }
-    
+
 }

@@ -1,6 +1,5 @@
 import Foundation
 
-
 /**
  Extension for the TodoItem structure for JSON converting
  
@@ -12,7 +11,7 @@ import Foundation
  - Be sure to use JSONSerialization (i.e. working with a dictionary)
  */
 extension TodoItem {
-    
+
     static func parse(json: Any) -> TodoItem? {
         let dateFormatter = ISO8601DateFormatter()
 
@@ -25,7 +24,7 @@ extension TodoItem {
         else {
             return nil
         }
-        
+
         let importance: Importance = {
             if let importanceString = jsonDict["importance"] as? String,
                let importance = Importance(rawValue: importanceString) {
@@ -33,28 +32,28 @@ extension TodoItem {
             }
             return .normal
         }()
-        
+
         let deadline: Date? = {
             if let deadlineString = jsonDict["deadline"] as? String {
                 return dateFormatter.date(from: deadlineString)
             }
             return nil
         }()
-        
+
         let modificationDate: Date? = {
             if let modificationDateString = jsonDict["modificationDate"] as? String {
                 return dateFormatter.date(from: modificationDateString)
             }
             return nil
         }()
-        
+
         let color: String? = {
             if let color = jsonDict["color"] as? String {
                 return color
             }
             return nil
         }()
-        
+
         return TodoItem(
             id: id,
             text: text,
@@ -66,7 +65,7 @@ extension TodoItem {
             color: color
         )
     }
-    
+
     var json: Any {
         let dateFormatter = ISO8601DateFormatter()
 
@@ -76,7 +75,7 @@ extension TodoItem {
             "isDone": isDone,
             "creationDate": dateFormatter.string(from: creationDate)
         ]
-        
+
         if importance != .normal {
             jsonDict["importance"] = importance.rawValue
         }
@@ -91,5 +90,5 @@ extension TodoItem {
         }
         return jsonDict
     }
-    
+
 }

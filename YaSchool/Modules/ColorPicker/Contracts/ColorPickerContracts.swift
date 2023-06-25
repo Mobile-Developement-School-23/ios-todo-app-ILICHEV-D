@@ -11,4 +11,3 @@ protocol ColorPickerViewInput: AnyObject {}
 protocol ColorPickerViewOutput: AnyObject {
     func saveButtonTapped(hesString: String)
 }
-
