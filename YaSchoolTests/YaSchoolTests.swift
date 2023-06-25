@@ -102,7 +102,7 @@ final class TodoItemTests: XCTestCase {
         XCTAssertEqual(json["creationDate"] as? String, "2023-06-10T12:00:00Z")
         XCTAssertEqual(json["modificationDate"] as? String, "2023-07-10T12:00:00Z")
     }
-    
+
     func testTodoItemCSVParsing() {
         let csvString = """
         1,First,,,false,2023-06-10T12:00:00Z,
