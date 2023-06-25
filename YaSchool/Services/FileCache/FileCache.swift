@@ -23,7 +23,7 @@ import Foundation
 
 final class FileCache: FileCacheType {
     
-    private(set) var todoItems: [TodoItem]
+    private var todoItems: [TodoItem]
     private let filename: String
     private let fileType: FileType
     
@@ -31,7 +31,7 @@ final class FileCache: FileCacheType {
         self.filename = filename
         self.todoItems = []
         self.fileType = fileType
-        loadFromFile()
+        let _ = loadFromFile()
     }
     
     func add(todoItem: TodoItem) {
@@ -48,6 +48,18 @@ final class FileCache: FileCacheType {
         saveToFile()
     }
     
+    func checkTodoItem(withID id: String) {
+        var item = todoItems.first { $0.id == id }
+        item?.isDone.toggle()
+        if let item = item {
+            add(todoItem: item)
+        }
+    }
+    
+    func loadTodoItems() -> [TodoItem] {
+        loadFromFile() ?? []
+    }
+    
     private func saveToFile() {
         switch fileType {
         case .json:
@@ -57,12 +69,12 @@ final class FileCache: FileCacheType {
         }
     }
     
-    private func loadFromFile() {
+    private func loadFromFile() -> [TodoItem]? {
         switch fileType {
         case .json:
-            loadJSONFromFile()
+            return loadJSONFromFile()
         case .csv:
-            loadCSVFromFile()
+            return loadCSVFromFile()
         }
     }
     
@@ -80,20 +92,22 @@ final class FileCache: FileCacheType {
         }
     }
     
-    private func loadJSONFromFile() {
-        guard let url = fileURL() else { return }
+    private func loadJSONFromFile() -> [TodoItem]? {
+        guard let url = fileURL() else { return nil }
         
         do {
             let data = try Data(contentsOf: url)
             let json = try JSONSerialization.jsonObject(with: data)
             if let jsonArray = json as? [Any] {
                 todoItems = jsonArray.compactMap { TodoItem.parse(json: $0) }
+                return todoItems
             } else {
-                return
+                return []
             }
         } catch {
             saveJSONToFile()
         }
+        return []
     }
     
     // MARK: - CSV Handling
@@ -109,15 +123,17 @@ final class FileCache: FileCacheType {
         }
     }
     
-    private func loadCSVFromFile() {
-        guard let url = fileURL() else { return }
+    private func loadCSVFromFile()  -> [TodoItem]? {
+        guard let url = fileURL() else { return [] }
         
         do {
             let csvString = try String(contentsOf: url, encoding: .utf8)
             todoItems = TodoItem.parseCSV(csvString: csvString)
+            return todoItems
         } catch {
             saveCSVToFile()
         }
+        return []
     }
     
     private func fileURL() -> URL? {

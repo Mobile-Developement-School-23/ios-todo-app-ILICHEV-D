@@ -14,10 +14,6 @@ class TaskDetailsInteractor: TaskDetailsInteractorInput {
 
 extension TaskDetailsInteractor {
     
-    func obtainRandomTask() -> TodoItem? {
-        fileCashe.todoItems.last
-    }
-    
     func deleteTask(todoItem: TodoItem) {
         fileCashe.removeTodoItem(withID: todoItem.id)
     }

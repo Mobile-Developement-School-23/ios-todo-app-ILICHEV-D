@@ -60,6 +60,7 @@ extension TaskDetailsViewController: TaskDetailsViewInput {
             } else {
                 deadlineSwitch.isOn = false
             }
+            deleteButton.isEnabled = true
         } else {
             textView.text = ""
             importanceSegmentedControl.selectedSegmentIndex = 1
@@ -82,7 +83,7 @@ extension TaskDetailsViewController: TaskDetailsViewInput {
 extension TaskDetailsViewController: UITextViewDelegate {
     
     func textViewDidChange(_ textView: UITextView) {
-        textFieldEditingChanged()
+        changeButtonsEnablingIfNeeded()
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
@@ -103,7 +104,7 @@ private extension TaskDetailsViewController {
         view.backgroundColor = UIColor(named: "Back")
         textView.delegate = self
         setupNavigationBar()
-        textFieldEditingChanged()
+        changeButtonsEnablingIfNeeded()
         setupContentView()
         setupContainerView()
         setupUIElements()
@@ -204,6 +205,7 @@ private extension TaskDetailsViewController {
     
     private func setupUIElements() {
         deleteButton.addTarget(self, action: #selector(deleteButtonTapped), for: .touchUpInside)
+        importanceSegmentedControl.addTarget(self, action: #selector(segmentValueChanged), for: .valueChanged)
         deadlineSwitch.addTarget(self, action: #selector(deadlineSwitchValueChanged), for: .valueChanged)
         deadlinePicker.addTarget(self, action: #selector(deadlinePickerValueChanged), for: .valueChanged)
     }
@@ -262,12 +264,17 @@ private extension TaskDetailsViewController {
             deadlineSubtitleLabel.text = nil
             deadlineSubtitleLabel.isHidden = true
         }
+        changeButtonsEnablingIfNeeded()
     }
     
     @objc private func deadlineSwitchValueChanged() {
         isCalendarAvailable = deadlineSwitch.isOn
         changeDatePickerVisibility()
         updateDeadlineSubtitle()
+    }
+    
+    @objc private func segmentValueChanged() {
+        changeButtonsEnablingIfNeeded()
     }
     
     private func changeDatePickerVisibility() {
@@ -325,7 +332,7 @@ private extension TaskDetailsViewController {
         textView.resignFirstResponder()
     }
     
-    private func textFieldEditingChanged() {
+    private func changeButtonsEnablingIfNeeded() {
         let isTextFieldEmpty = !(textView.text ?? "").isEmpty
         deleteButton.isEnabled = isTextFieldEmpty
         saveButton.isEnabled = isTextFieldEmpty
@@ -431,7 +438,7 @@ private extension TaskDetailsViewController {
         secondEmptyView.backgroundColor = UIColor(named: "BackSecondary")
         let divider = UIView()
         divider.translatesAutoresizingMaskIntoConstraints = false
-        divider.backgroundColor = .lightGray
+        divider.backgroundColor = UIColor(named: "Separator")
         let stack = UIStackView()
         stack.axis = .horizontal
         stack.addArrangedSubview(firstEmptyView)
@@ -454,7 +461,7 @@ private extension TaskDetailsViewController {
     
     static func makeDeadlineSubtitleLabel() -> UILabel {
         let label = UILabel()
-        label.textColor = .blue
+        label.textColor = UIColor(named: "Blue")
         label.font = .systemFont(ofSize: 13)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
