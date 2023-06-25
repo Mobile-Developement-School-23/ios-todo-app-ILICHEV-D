@@ -6,6 +6,8 @@ protocol TaskDetailsModuleInput {
 
 protocol TaskDetailsModuleOutput {
     func didAskToShowColorPicker()
+    func didAskToReloadItems()
+    func didAskToCloseTaskDetails()
 }
 
 protocol TaskDetailsViewInput: AnyObject {
@@ -24,7 +26,6 @@ protocol TaskDetailsViewOutput {
 }
 
 protocol TaskDetailsInteractorInput {
-    func obtainRandomTask() -> TodoItem?
     func deleteTask(todoItem: TodoItem)
     func saveTask(todoItem: TodoItem)
 }

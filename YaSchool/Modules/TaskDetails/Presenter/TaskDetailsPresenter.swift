@@ -8,7 +8,8 @@ class TaskDetailsPresenter {
     var interactor: TaskDetailsInteractorInput?
     var output: TaskDetailsModuleOutput?
     
-    private var currentTask: TodoItem?
+    var currentTask: TodoItem?
+    
 }
 
 // MARK: Private
@@ -36,26 +37,35 @@ extension TaskDetailsPresenter: TaskDetailsViewOutput {
         if let currentTask = currentTask {
             interactor?.deleteTask(todoItem: currentTask)
         }
-        loadData()
+        output?.didAskToReloadItems()
     }
     
     func saveButtonTapped(text: String, importance: Importance, deadline: Date?, color: String?) {
-        interactor?.saveTask(todoItem: TodoItem(text: text, importance: importance, deadline: deadline, isDone: false, creationDate: Date(), color: color))
-        loadData()
+        if let task = currentTask {
+            interactor?.saveTask(todoItem: TodoItem(
+                id: task.id, text: text, importance: importance, deadline: deadline, isDone: task.isDone, creationDate: Date(), color: color)
+            )
+        } else {
+            interactor?.saveTask(todoItem: TodoItem(
+                text: text, importance: importance, deadline: deadline, isDone: false, creationDate: Date(), color: color)
+            )
+        }
+        output?.didAskToReloadItems()
     }
     
     func colorPickerTapped() {
         output?.didAskToShowColorPicker()
     }
     
-    func cancelButtonTapped() {}
+    func cancelButtonTapped() {
+        output?.didAskToCloseTaskDetails()
+    }
     
 }
 
 private extension TaskDetailsPresenter {
     
     func loadData() {
-        currentTask = interactor?.obtainRandomTask()
         view?.configure(currentTask)
     }
     

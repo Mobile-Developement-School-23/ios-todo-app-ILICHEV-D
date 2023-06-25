@@ -48,6 +48,13 @@ extension TodoItem {
             return nil
         }()
         
+        let color: String? = {
+            if let color = jsonDict["color"] as? String {
+                return color
+            }
+            return nil
+        }()
+        
         return TodoItem(
             id: id,
             text: text,
@@ -55,7 +62,8 @@ extension TodoItem {
             deadline: deadline,
             isDone: isDone,
             creationDate: creationDate,
-            modificationDate: modificationDate
+            modificationDate: modificationDate,
+            color: color
         )
     }
     
@@ -77,6 +85,9 @@ extension TodoItem {
         }
         if let modificationDate = modificationDate {
             jsonDict["modificationDate"] = dateFormatter.string(from: modificationDate)
+        }
+        if let color = color {
+            jsonDict["color"] = color
         }
         return jsonDict
     }
