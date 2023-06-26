@@ -1,5 +1,6 @@
 import Foundation
 import FileCache
+import TodoItem
 
 class TaskDetailsPresenter {
 

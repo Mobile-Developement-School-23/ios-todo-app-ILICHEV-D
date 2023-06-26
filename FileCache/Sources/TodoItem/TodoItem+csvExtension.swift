@@ -10,7 +10,7 @@ public extension TodoItem {
      - warning: Assuming CSV format: id,text,importance,deadline,isDone,creationDate,modificationDate
      
      */
-    public static func parseCSV(csvString: String) -> [TodoItem] {
+    static func parseCSV(csvString: String) -> [TodoItem] {
         var todoItems: [TodoItem] = []
 
         let rows = csvString.components(separatedBy: "\n")
@@ -61,7 +61,7 @@ public extension TodoItem {
         return todoItems
     }
 
-    public func toCSV() -> String {
+    func toCSV() -> String {
         var csvString = "\(id),\(text),\(importance.rawValue),"
 
         if let deadline = deadline {

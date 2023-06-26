@@ -7,6 +7,7 @@
 // 〉Предусмотреть механизм защиты от дублирования задач (сравниванием id)
 
 import Foundation
+import TodoItem
 
 /**
  A class for working with TodoItems

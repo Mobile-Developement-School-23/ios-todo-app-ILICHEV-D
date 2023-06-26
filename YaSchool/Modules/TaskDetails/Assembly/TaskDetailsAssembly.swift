@@ -1,5 +1,6 @@
 import UIKit
 import FileCache
+import TodoItem
 
 class TaskDetailsAssembly { // Assembly
 

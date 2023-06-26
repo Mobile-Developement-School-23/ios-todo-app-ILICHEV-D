@@ -1,4 +1,5 @@
 import Foundation
+import TodoItem
 
 public protocol FileCacheType {
 

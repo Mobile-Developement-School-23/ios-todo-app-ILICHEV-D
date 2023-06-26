@@ -35,7 +35,6 @@
 		ADDB0D4C2A3EF8F600A8BEBD /* TaskCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADDB0D452A3EF8F500A8BEBD /* TaskCoordinator.swift */; };
 		ADDB0D4E2A3EF8F600A8BEBD /* TaskCoordinatorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADDB0D472A3EF8F500A8BEBD /* TaskCoordinatorType.swift */; };
 		ADDB0D552A3EFB0300A8BEBD /* CoordinateType.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADDB0D542A3EFB0300A8BEBD /* CoordinateType.swift */; };
-		ADDB0D5D2A3F013E00A8BEBD /* FileCacheType.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADDB0D5A2A3F013E00A8BEBD /* FileCacheType.swift */; };
 		ADDB0D5E2A3F013E00A8BEBD /* FileCacheAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADDB0D5B2A3F013E00A8BEBD /* FileCacheAssembly.swift */; };
 		ADFF77B32A4336C6001F3F31 /* UIColor+extenstions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADFF77B22A4336C6001F3F31 /* UIColor+extenstions.swift */; };
 		ADFF77C12A43371C001F3F31 /* ColorPickerAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADFF77B82A43371C001F3F31 /* ColorPickerAssembly.swift */; };
@@ -96,7 +95,6 @@
 		ADDB0D452A3EF8F500A8BEBD /* TaskCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskCoordinator.swift; sourceTree = "<group>"; };
 		ADDB0D472A3EF8F500A8BEBD /* TaskCoordinatorType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskCoordinatorType.swift; sourceTree = "<group>"; };
 		ADDB0D542A3EFB0300A8BEBD /* CoordinateType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinateType.swift; sourceTree = "<group>"; };
-		ADDB0D5A2A3F013E00A8BEBD /* FileCacheType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileCacheType.swift; sourceTree = "<group>"; };
 		ADDB0D5B2A3F013E00A8BEBD /* FileCacheAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileCacheAssembly.swift; sourceTree = "<group>"; };
 		ADFF77B22A4336C6001F3F31 /* UIColor+extenstions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+extenstions.swift"; sourceTree = "<group>"; };
 		ADFF77B82A43371C001F3F31 /* ColorPickerAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPickerAssembly.swift; sourceTree = "<group>"; };
@@ -375,7 +373,6 @@
 		ADDB0D592A3F013E00A8BEBD /* FileCache */ = {
 			isa = PBXGroup;
 			children = (
-				ADDB0D5A2A3F013E00A8BEBD /* FileCacheType.swift */,
 				ADDB0D5B2A3F013E00A8BEBD /* FileCacheAssembly.swift */,
 			);
 			path = FileCache;
@@ -669,7 +666,6 @@
 				ADDB0D402A3EF8D600A8BEBD /* TaskDetailsContracts.swift in Sources */,
 				ADDB0D3F2A3EF8D600A8BEBD /* TaskDetailsAssembly.swift in Sources */,
 				ADFF77C42A43371C001F3F31 /* ColorPickerViewController.swift in Sources */,
-				ADDB0D5D2A3F013E00A8BEBD /* FileCacheType.swift in Sources */,
 				AD3E75A62A3F2CC300985ECA /* Date+extensions.swift in Sources */,
 				ADFF77C22A43371C001F3F31 /* ColorPickerContracts.swift in Sources */,
 				ADFF77B32A4336C6001F3F31 /* UIColor+extenstions.swift in Sources */,

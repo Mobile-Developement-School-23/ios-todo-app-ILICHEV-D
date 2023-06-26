@@ -1,5 +1,6 @@
 import XCTest
 import FileCache
+import TodoItem
 @testable import YaSchool
 
 final class TodoItemTests: XCTestCase {
