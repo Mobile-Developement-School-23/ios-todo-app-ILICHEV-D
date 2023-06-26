@@ -1,6 +1,6 @@
 import Foundation
 
-extension TodoItem {
+public extension TodoItem {
 
     /**
      Function for the TodoItem structure for conversion from CSV
@@ -10,7 +10,7 @@ extension TodoItem {
      - warning: Assuming CSV format: id,text,importance,deadline,isDone,creationDate,modificationDate
      
      */
-    static func parseCSV(csvString: String) -> [TodoItem] {
+    public static func parseCSV(csvString: String) -> [TodoItem] {
         var todoItems: [TodoItem] = []
 
         let rows = csvString.components(separatedBy: "\n")
@@ -61,7 +61,7 @@ extension TodoItem {
         return todoItems
     }
 
-    func toCSV() -> String {
+    public func toCSV() -> String {
         var csvString = "\(id),\(text),\(importance.rawValue),"
 
         if let deadline = deadline {

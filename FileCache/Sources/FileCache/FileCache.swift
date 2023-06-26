@@ -20,20 +20,20 @@ import Foundation
  - Provide a mechanism to protect against duplication of tasks (by comparing IDs)
  */
 
-final class FileCache: FileCacheType {
+public final class FileCache: FileCacheType {
 
     private var todoItems: [TodoItem]
     private let filename: String
     private let fileType: FileType
 
-    init(filename: String, fileType: FileType) {
+    public init(filename: String, fileType: FileType) {
         self.filename = filename
         self.todoItems = []
         self.fileType = fileType
         _ = loadFromFile()
     }
 
-    func add(todoItem: TodoItem) {
+    public func add(todoItem: TodoItem) {
         if let index = todoItems.firstIndex(where: { $0.id == todoItem.id }) {
             todoItems[index] = todoItem
         } else {
@@ -42,12 +42,12 @@ final class FileCache: FileCacheType {
         saveToFile()
     }
 
-    func removeTodoItem(withID id: String) {
+    public func removeTodoItem(withID id: String) {
         todoItems.removeAll { $0.id == id }
         saveToFile()
     }
 
-    func checkTodoItem(withID id: String) {
+    public func checkTodoItem(withID id: String) {
         var item = todoItems.first { $0.id == id }
         item?.isDone.toggle()
         if let item = item {
@@ -55,7 +55,7 @@ final class FileCache: FileCacheType {
         }
     }
 
-    func loadTodoItems() -> [TodoItem] {
+    public func loadTodoItems() -> [TodoItem] {
         loadFromFile() ?? []
     }
 
@@ -143,7 +143,7 @@ final class FileCache: FileCacheType {
 
 // MARK: Helpers
 
-enum FileType {
+public enum FileType {
     case json
     case csv
 }

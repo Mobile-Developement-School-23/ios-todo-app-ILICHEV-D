@@ -12,7 +12,7 @@ import Foundation
  */
 extension TodoItem {
 
-    static func parse(json: Any) -> TodoItem? {
+    public static func parse(json: Any) -> TodoItem? {
         let dateFormatter = ISO8601DateFormatter()
 
         guard let jsonDict = json as? [String: Any],
@@ -66,7 +66,7 @@ extension TodoItem {
         )
     }
 
-    var json: Any {
+    public var json: Any {
         let dateFormatter = ISO8601DateFormatter()
 
         var jsonDict: [String: Any] = [

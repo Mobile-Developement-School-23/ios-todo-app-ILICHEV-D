@@ -1,4 +1,5 @@
 import Foundation
+import FileCache
 import UIKit
 
 class TaskCoordinator: CoordinatorType, TaskCoordinatorType { // BaseCoordinator

@@ -1,5 +1,6 @@
 import Foundation
 import UIKit
+import FileCache
 
 protocol CustomTableViewCellDelegate: AnyObject {
     func didTapCell(in cell: CustomTableViewCell)

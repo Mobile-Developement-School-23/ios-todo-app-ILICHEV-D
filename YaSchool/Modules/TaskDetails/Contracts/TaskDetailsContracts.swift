@@ -1,4 +1,5 @@
 import Foundation
+import FileCache
 
 protocol TaskDetailsModuleInput {
     func setHexColor(hexString: String)

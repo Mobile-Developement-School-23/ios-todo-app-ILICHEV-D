@@ -1,4 +1,5 @@
 import UIKit
+import FileCache
 
 // swiftlint:disable file_length
 
