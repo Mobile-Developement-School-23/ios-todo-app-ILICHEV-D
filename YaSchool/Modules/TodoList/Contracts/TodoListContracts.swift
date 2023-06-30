@@ -1,4 +1,5 @@
 import Foundation
+import TodoItem
 
 protocol TodoListModuleInput {
     func reloadItems()
@@ -14,13 +15,13 @@ protocol TodoListViewInput: AnyObject {
 
 protocol TodoListViewOutput {
     func viewDidLoad()
-    
+
     func deleteButtonTapped(index: Int)
     func infoButtonTapped(index: Int)
     func checkButtonTapped(index: Int)
     func addNewTaskButtonTapped()
     func toggleCompletedTasksVisibility()
-    
+
 }
 
 protocol TodoListInteractorInput {
@@ -29,4 +30,3 @@ protocol TodoListInteractorInput {
     func saveTask(todoItem: TodoItem)
     func checkTask(id: String) -> [TodoItem]
 }
-

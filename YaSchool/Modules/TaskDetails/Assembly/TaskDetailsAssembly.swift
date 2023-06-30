@@ -1,8 +1,15 @@
 import UIKit
+import FileCache
+import TodoItem
 
 class TaskDetailsAssembly { // Assembly
-    
-    func build(moduleOutput: TaskDetailsModuleOutput?, task: TodoItem?, filename: String, type: FileType) -> (UIViewController, TaskDetailsModuleInput) {
+
+    func build(
+        moduleOutput: TaskDetailsModuleOutput?,
+        task: TodoItem?,
+        filename: String,
+        type: FileType
+    ) -> (UIViewController, TaskDetailsModuleInput) {
         let view = TaskDetailsViewController()
         let interactor = TaskDetailsInteractor(fileCashe: FileCacheAssembly.build(filename: filename, type: type))
         let presenter = TaskDetailsPresenter()

@@ -20,7 +20,7 @@ struct TodoItem {
     let creationDate: Date
     let modificationDate: Date?
     var color: String?
-    
+
     init(
         id: String = UUID().uuidString,
         text: String,
@@ -47,4 +47,3 @@ enum Importance: String {
     case normal = "обычная"
     case high = "важная"
 }
-

@@ -1,4 +1,5 @@
 import Foundation
+import TodoItem
 
 protocol TaskDetailsModuleInput {
     func setHexColor(hexString: String)
@@ -17,16 +18,15 @@ protocol TaskDetailsViewInput: AnyObject {
 
 protocol TaskDetailsViewOutput {
     func viewDidLoad()
-    
+
     func deleteButtonTapped()
     func saveButtonTapped(text: String, importance: Importance, deadline: Date?, color: String?)
     func cancelButtonTapped()
     func colorPickerTapped()
-    
+
 }
 
 protocol TaskDetailsInteractorInput {
     func deleteTask(todoItem: TodoItem)
     func saveTask(todoItem: TodoItem)
 }
-
