@@ -3,11 +3,11 @@ import Foundation
 protocol ColorPickerModuleInput {}
 
 protocol ColorPickerModuleOutput {
-    func didSelectTodoItemColor(string: String)
+    @MainActor func didSelectTodoItemColor(string: String)
 }
 
 protocol ColorPickerViewInput: AnyObject {}
 
 protocol ColorPickerViewOutput: AnyObject {
-    func saveButtonTapped(hexString: String)
+    @MainActor func saveButtonTapped(hexString: String)
 }

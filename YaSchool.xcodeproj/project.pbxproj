@@ -18,6 +18,9 @@
 		AD6907A42A34946600E32AEA /* YaSchoolTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6907A32A34946600E32AEA /* YaSchoolTests.swift */; };
 		AD6907AE2A34946600E32AEA /* YaSchoolUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6907AD2A34946600E32AEA /* YaSchoolUITests.swift */; };
 		AD6907B02A34946600E32AEA /* YaSchoolUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6907AF2A34946600E32AEA /* YaSchoolUITestsLaunchTests.swift */; };
+		AD96E91B2A516EAC00AC8952 /* URLSession+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD96E91A2A516EAC00AC8952 /* URLSession+extensions.swift */; };
+		AD96E91D2A517DF300AC8952 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD96E91C2A517DF300AC8952 /* NetworkService.swift */; };
+		AD96E91F2A5187C900AC8952 /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD96E91E2A5187C900AC8952 /* Networking.swift */; };
 		ADCF374E2A484057004D8347 /* CustomViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADCF374D2A484057004D8347 /* CustomViewCell.swift */; };
 		ADCF375A2A485B8C004D8347 /* TodoListAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADCF37512A485B8C004D8347 /* TodoListAssembly.swift */; };
 		ADCF375B2A485B8C004D8347 /* TodoListContracts.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADCF37532A485B8C004D8347 /* TodoListContracts.swift */; };
@@ -81,6 +84,9 @@
 		AD6907A92A34946600E32AEA /* YaSchoolUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = YaSchoolUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD6907AD2A34946600E32AEA /* YaSchoolUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YaSchoolUITests.swift; sourceTree = "<group>"; };
 		AD6907AF2A34946600E32AEA /* YaSchoolUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YaSchoolUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		AD96E91A2A516EAC00AC8952 /* URLSession+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+extensions.swift"; sourceTree = "<group>"; };
+		AD96E91C2A517DF300AC8952 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		AD96E91E2A5187C900AC8952 /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
 		ADCF374D2A484057004D8347 /* CustomViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomViewCell.swift; sourceTree = "<group>"; };
 		ADCF37512A485B8C004D8347 /* TodoListAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoListAssembly.swift; sourceTree = "<group>"; };
 		ADCF37532A485B8C004D8347 /* TodoListContracts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoListContracts.swift; sourceTree = "<group>"; };
@@ -169,6 +175,7 @@
 				AD3E75A52A3F2CC300985ECA /* Date+extensions.swift */,
 				ADFF77B22A4336C6001F3F31 /* UIColor+extenstions.swift */,
 				ADFF77C82A4347A3001F3F31 /* String+extensions.swift */,
+				AD96E91A2A516EAC00AC8952 /* URLSession+extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -233,6 +240,8 @@
 			isa = PBXGroup;
 			children = (
 				ADDB0D592A3F013E00A8BEBD /* FileCache */,
+				AD96E91C2A517DF300AC8952 /* NetworkService.swift */,
+				AD96E91E2A5187C900AC8952 /* Networking.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -641,7 +650,8 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
+			shellScript = "
+";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -653,9 +663,11 @@
 				ADCF375C2A485B8C004D8347 /* TodoListPresenter.swift in Sources */,
 				ADCF374E2A484057004D8347 /* CustomViewCell.swift in Sources */,
 				ADCF375B2A485B8C004D8347 /* TodoListContracts.swift in Sources */,
+				AD96E91F2A5187C900AC8952 /* Networking.swift in Sources */,
 				AD69078D2A34946500E32AEA /* AppDelegate.swift in Sources */,
 				ADDB0D4C2A3EF8F600A8BEBD /* TaskCoordinator.swift in Sources */,
 				ADFF77C92A4347A3001F3F31 /* String+extensions.swift in Sources */,
+				AD96E91B2A516EAC00AC8952 /* URLSession+extensions.swift in Sources */,
 				ADCF375A2A485B8C004D8347 /* TodoListAssembly.swift in Sources */,
 				ADDB0D432A3EF8D600A8BEBD /* TaskDetailsInteractor.swift in Sources */,
 				ADDB0D5E2A3F013E00A8BEBD /* FileCacheAssembly.swift in Sources */,
@@ -673,6 +685,7 @@
 				ADCF375D2A485B8C004D8347 /* TodoListViewController.swift in Sources */,
 				ADDB0D4E2A3EF8F600A8BEBD /* TaskCoordinatorType.swift in Sources */,
 				ADFF77C12A43371C001F3F31 /* ColorPickerAssembly.swift in Sources */,
+				AD96E91D2A517DF300AC8952 /* NetworkService.swift in Sources */,
 				ADDB0D422A3EF8D600A8BEBD /* TaskDetailsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -778,6 +791,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_STRICT_CONCURRENCY = complete;
 			};
 			name = Debug;
 		};
@@ -831,6 +845,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_STRICT_CONCURRENCY = complete;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
