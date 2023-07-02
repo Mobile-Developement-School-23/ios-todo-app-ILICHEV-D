@@ -67,7 +67,7 @@ extension TodoListPresenter: TodoListViewOutput {
 
 private extension TodoListPresenter {
 
-    func reloadView() {
+    @MainActor func reloadView() {
         tasks.sort { $0.creationDate < $1.creationDate }
         let activeTasks = tasks.filter { !$0.isDone }
         let completedTasksCount = tasks.count - activeTasks.count

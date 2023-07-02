@@ -2,27 +2,27 @@ import Foundation
 import TodoItem
 
 protocol TaskDetailsModuleInput {
-    func setHexColor(hexString: String)
+    @MainActor func setHexColor(hexString: String)
 }
 
 protocol TaskDetailsModuleOutput {
-    func didAskToShowColorPicker()
-    func didAskToReloadItems()
-    func didAskToCloseTaskDetails()
+    @MainActor func didAskToShowColorPicker()
+    @MainActor func didAskToReloadItems()
+    @MainActor func didAskToCloseTaskDetails()
 }
 
 protocol TaskDetailsViewInput: AnyObject {
-    func configure(_ model: TodoItem?)
-    func colorText(_ hextString: String)
+    @MainActor func configure(_ model: TodoItem?)
+    @MainActor func colorText(_ hextString: String)
 }
 
 protocol TaskDetailsViewOutput {
-    func viewDidLoad()
+    @MainActor func viewDidLoad()
 
-    func deleteButtonTapped()
-    func saveButtonTapped(text: String, importance: Importance, deadline: Date?, color: String?)
-    func cancelButtonTapped()
-    func colorPickerTapped()
+    @MainActor func deleteButtonTapped()
+    @MainActor func saveButtonTapped(text: String, importance: Importance, deadline: Date?, color: String?)
+    @MainActor func cancelButtonTapped()
+    @MainActor func colorPickerTapped()
 
 }
 

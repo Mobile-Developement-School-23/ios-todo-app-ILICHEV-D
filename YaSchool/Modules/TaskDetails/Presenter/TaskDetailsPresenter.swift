@@ -22,7 +22,7 @@ extension TaskDetailsPresenter {
 // MARK: Module Input
 extension TaskDetailsPresenter: TaskDetailsModuleInput {
 
-    func setHexColor(hexString: String) {
+    @MainActor func setHexColor(hexString: String) {
         view?.colorText(hexString)
     }
 
@@ -35,7 +35,7 @@ extension TaskDetailsPresenter: TaskDetailsViewOutput {
         loadData()
     }
 
-    func deleteButtonTapped() {
+    @MainActor func deleteButtonTapped() {
         if let currentTask = currentTask {
             interactor?.deleteTask(todoItem: currentTask)
         }
@@ -78,7 +78,7 @@ extension TaskDetailsPresenter: TaskDetailsViewOutput {
 
 private extension TaskDetailsPresenter {
 
-    func loadData() {
+    @MainActor func loadData() {
         view?.configure(currentTask)
     }
 

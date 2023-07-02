@@ -25,8 +25,8 @@ protocol TodoListViewOutput {
 }
 
 protocol TodoListInteractorInput {
-    func obtainTasks() async throws -> [TodoItem]
-    func deleteTask(id: String) async -> [TodoItem]
+    func obtainTasks() -> [TodoItem]
+    func deleteTask(id: String) -> [TodoItem]
     func saveTask(todoItem: TodoItem)
     func checkTask(id: String) -> [TodoItem]
 }
