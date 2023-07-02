@@ -124,7 +124,7 @@ class ColorPickerViewController: UIViewController {
     }
 
     @objc private func saveButtonTapped() {
-        output?.saveButtonTapped(hesString: color.hexString)
+        output?.saveButtonTapped(hexString: color.hexString)
         self.navigationController?.popViewController(animated: true)
     }
 

@@ -1,4 +1,5 @@
 import Foundation
+import CocoaLumberjackSwift
 
 public extension Date {
 
@@ -8,6 +9,8 @@ public extension Date {
         let midnight = calendar.startOfDay(for: today)
         if let tomorrow = calendar.date(byAdding: .day, value: 1, to: midnight) {
             return tomorrow
+        } else {
+            DDLogError("Failed finding tomorrow date")
         }
         return today
     }

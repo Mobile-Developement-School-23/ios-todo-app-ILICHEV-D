@@ -497,6 +497,7 @@ private extension TaskDetailsViewController {
         datePicker.date = Date.tomorrow
         datePicker.datePickerMode = .date
         datePicker.preferredDatePickerStyle = .inline
+        datePicker.minimumDate = Date()
         return datePicker
     }
 

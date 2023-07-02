@@ -9,5 +9,5 @@ protocol ColorPickerModuleOutput {
 protocol ColorPickerViewInput: AnyObject {}
 
 protocol ColorPickerViewOutput: AnyObject {
-    func saveButtonTapped(hesString: String)
+    func saveButtonTapped(hexString: String)
 }

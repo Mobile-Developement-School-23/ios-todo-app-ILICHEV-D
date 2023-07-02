@@ -21,8 +21,8 @@ extension ColorPickerPresenter: ColorPickerModuleInput {
 // MARK: View Output
 extension ColorPickerPresenter: ColorPickerViewOutput {
 
-    func saveButtonTapped(hesString: String) {
-        output?.didSelectTodoItemColor(string: hesString)
+    func saveButtonTapped(hexString: String) {
+        output?.didSelectTodoItemColor(string: hexString)
     }
 
 }

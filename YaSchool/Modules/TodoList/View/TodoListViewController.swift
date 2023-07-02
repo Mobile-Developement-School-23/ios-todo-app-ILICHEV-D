@@ -67,7 +67,6 @@ class TodoListViewController: UIViewController {
     func setupTableView() {
         tableView.backgroundColor = UIColor(named: "Back")
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        //        tableView.tableHeaderView = headerView
 
         view.addSubview(tableView)
 
