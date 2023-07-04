@@ -86,7 +86,7 @@ class TodoListViewController: UIViewController {
 
 extension TodoListViewController: TodoListViewInput {
 
-    func configure(_ model: [TodoItem], completedTasksIsHidden: Bool, completedTasksCount: Int) {
+    @MainActor func configure(_ model: [TodoItem], completedTasksIsHidden: Bool, completedTasksCount: Int) {
         headerLabel.text = "Выполнено — \(completedTasksCount)"
         headerButtonLabel.text = completedTasksIsHidden ? "Показать" : "Скрыть"
         todoItems = model
@@ -166,7 +166,7 @@ extension TodoListViewController: UITableViewDataSource, UITableViewDelegate {
 
 extension TodoListViewController: CustomTableViewCellDelegate {
 
-    func didTapCell(in cell: CustomTableViewCell) {
+    @MainActor func didTapCell(in cell: CustomTableViewCell) {
         guard let indexPath = tableView.indexPath(for: cell) else {
             return
         }
@@ -177,7 +177,7 @@ extension TodoListViewController: CustomTableViewCellDelegate {
         }
     }
 
-    func didTapCheckbox(in cell: CustomTableViewCell) {
+    @MainActor func didTapCheckbox(in cell: CustomTableViewCell) {
         guard let indexPath = tableView.indexPath(for: cell) else {
             return
         }

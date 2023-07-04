@@ -2,25 +2,25 @@ import Foundation
 import TodoItem
 
 protocol TodoListModuleInput {
-    func reloadItems()
+    @MainActor func reloadItems()
 }
 
 protocol TodoListModuleOutput {
-    func didAskToShowTaskDetails(task: TodoItem?)
+    @MainActor func didAskToShowTaskDetails(task: TodoItem?)
 }
 
 protocol TodoListViewInput: AnyObject {
-    func configure(_ model: [TodoItem], completedTasksIsHidden: Bool, completedTasksCount: Int)
+    @MainActor func configure(_ model: [TodoItem], completedTasksIsHidden: Bool, completedTasksCount: Int)
 }
 
 protocol TodoListViewOutput {
-    func viewDidLoad()
+    @MainActor func viewDidLoad()
 
-    func deleteButtonTapped(index: Int)
-    func infoButtonTapped(index: Int)
-    func checkButtonTapped(index: Int)
-    func addNewTaskButtonTapped()
-    func toggleCompletedTasksVisibility()
+    @MainActor func deleteButtonTapped(index: Int)
+    @MainActor func infoButtonTapped(index: Int)
+    @MainActor func checkButtonTapped(index: Int)
+    @MainActor func addNewTaskButtonTapped()
+    @MainActor func toggleCompletedTasksVisibility()
 
 }
 

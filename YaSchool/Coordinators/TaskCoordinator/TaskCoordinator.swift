@@ -9,7 +9,7 @@ class TaskCoordinator: CoordinatorType, TaskCoordinatorType { // BaseCoordinator
     var todoListModuleInput: TodoListModuleInput?
     var taskDetailsModuleInput: TaskDetailsModuleInput?
 
-    func build() -> UINavigationController? {
+    @MainActor func build() -> UINavigationController? {
         buildEntryPoint()
         return navigationController
     }
@@ -17,7 +17,7 @@ class TaskCoordinator: CoordinatorType, TaskCoordinatorType { // BaseCoordinator
 
 extension TaskCoordinator: TodoListModuleOutput {
 
-    func didAskToShowTaskDetails(task: TodoItem?) {
+    @MainActor func didAskToShowTaskDetails(task: TodoItem?) {
         showTaskDetails(task: task)
     }
 
@@ -25,18 +25,18 @@ extension TaskCoordinator: TodoListModuleOutput {
 
 extension TaskCoordinator: TaskDetailsModuleOutput {
 
-    func didAskToShowColorPicker() {
+    @MainActor func didAskToShowColorPicker() {
         showColorPicker()
     }
 
-    func didAskToReloadItems() {
+    @MainActor func didAskToReloadItems() {
         modalNavigationController?.dismiss(animated: true) {
             self.modalNavigationController = nil
         }
         todoListModuleInput?.reloadItems()
     }
 
-    func didAskToCloseTaskDetails() {
+    @MainActor func didAskToCloseTaskDetails() {
         modalNavigationController?.dismiss(animated: true) {
             self.modalNavigationController = nil
         }
@@ -46,7 +46,7 @@ extension TaskCoordinator: TaskDetailsModuleOutput {
 
 extension TaskCoordinator: ColorPickerModuleOutput {
 
-    func didSelectTodoItemColor(string: String) {
+    @MainActor func didSelectTodoItemColor(string: String) {
         taskDetailsModuleInput?.setHexColor(hexString: string)
     }
 
@@ -54,18 +54,18 @@ extension TaskCoordinator: ColorPickerModuleOutput {
 
 private extension TaskCoordinator {
 
-    func buildEntryPoint() {
+    @MainActor func buildEntryPoint() {
         let module = TodoListAssembly().build(moduleOutput: self, filename: "example", type: .json)
         todoListModuleInput = module.1
         self.navigationController = UINavigationController(rootViewController: module.0)
     }
 
-    func showColorPicker() {
+    @MainActor func showColorPicker() {
         let module = ColorPickerAssembly.build(moduleOutput: self)
         modalNavigationController?.pushViewController(module, animated: true)
     }
 
-    func showTaskDetails(task: TodoItem?) {
+    @MainActor func showTaskDetails(task: TodoItem?) {
         let module = TaskDetailsAssembly().build(moduleOutput: self, task: task, filename: "example", type: .json)
         taskDetailsModuleInput = module.1
         modalNavigationController = UINavigationController(rootViewController: module.0)

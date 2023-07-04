@@ -3,7 +3,7 @@ import FileCache
 
 class TodoListAssembly {
 
-    func build(
+    @MainActor func build(
         moduleOutput: TodoListModuleOutput?, filename: String, type: FileType
     ) -> (UIViewController, TodoListModuleInput) {
         let view = TodoListViewController()

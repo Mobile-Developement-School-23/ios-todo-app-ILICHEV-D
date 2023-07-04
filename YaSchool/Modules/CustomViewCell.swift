@@ -3,8 +3,8 @@ import UIKit
 import TodoItem
 
 protocol CustomTableViewCellDelegate: AnyObject {
-    func didTapCell(in cell: CustomTableViewCell)
-    func didTapCheckbox(in cell: CustomTableViewCell)
+    @MainActor func didTapCell(in cell: CustomTableViewCell)
+    @MainActor func didTapCheckbox(in cell: CustomTableViewCell)
 }
 
 class CustomTableViewCell: UITableViewCell {

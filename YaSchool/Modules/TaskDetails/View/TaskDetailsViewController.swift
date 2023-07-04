@@ -50,7 +50,7 @@ class TaskDetailsViewController: UIViewController {
 // MARK: - TaskDetailsViewInput
 extension TaskDetailsViewController: TaskDetailsViewInput {
 
-    func configure(_ model: TodoItem?) {
+    @MainActor func configure(_ model: TodoItem?) {
         if let model = model {
             placeholderLabel.isHidden = true
             textView.text = model.text
@@ -73,7 +73,7 @@ extension TaskDetailsViewController: TaskDetailsViewInput {
         deadlineSwitchValueChanged()
     }
 
-    func colorText(_ hextString: String) {
+    @MainActor func colorText(_ hextString: String) {
         textView.textColor = hextString.colorFromHexString() ?? .label
 
     }

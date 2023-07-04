@@ -4,7 +4,7 @@ import TodoItem
 
 class TaskDetailsAssembly { // Assembly
 
-    func build(
+    @MainActor func build(
         moduleOutput: TaskDetailsModuleOutput?,
         task: TodoItem?,
         filename: String,

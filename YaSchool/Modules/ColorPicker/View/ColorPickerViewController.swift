@@ -132,7 +132,7 @@ class ColorPickerViewController: UIViewController {
 
 extension ColorPickerViewController: ColorPickerViewDelegate {
 
-    func didSelectColor(_ color: UIColor) {
+    @MainActor func didSelectColor(_ color: UIColor) {
         self.color = color
         colorPreviewView.backgroundColor = color.withAlphaComponent(alphaComponent)
         colorCodeLabel.text = color.withAlphaComponent(alphaComponent).hexString
@@ -145,7 +145,7 @@ extension ColorPickerViewController: ColorPickerViewInput { }
 
 protocol ColorPickerViewDelegate: AnyObject {
 
-    func didSelectColor(_ color: UIColor)
+    @MainActor func didSelectColor(_ color: UIColor)
 
 }
 
