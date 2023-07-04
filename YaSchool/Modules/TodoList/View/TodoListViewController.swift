@@ -7,6 +7,10 @@ class TodoListViewController: UIViewController {
 
     private let tableView = UITableView(frame: .zero, style: .insetGrouped)
     private var headerView = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: 44))
+    
+    private var addBlueButtonView = UIImageView()
+    private var loadingIndicatorView = UIActivityIndicatorView(style: .large)
+    private var dirtyIndicatorLabelView = UILabel()
 
     private let headerLabel = UILabel()
     private let headerButtonLabel = UILabel()
@@ -21,6 +25,9 @@ class TodoListViewController: UIViewController {
         setupHeaderView()
         setupTableView()
         setupBottomButton()
+        setupLoadingIndicator()
+        setupDirtyIndicatorView()
+        configureBottomButton(status: .loading)
     }
 
     private func setupNavigation() {
@@ -93,6 +100,10 @@ extension TodoListViewController: TodoListViewInput {
         tableView.reloadData()
     }
 
+    @MainActor func setStatus(_ status: TodoListViewStatus) {
+        configureBottomButton(status: status)
+    }
+    
 }
 
 extension TodoListViewController: UITableViewDataSource, UITableViewDelegate {
@@ -188,27 +199,77 @@ extension TodoListViewController: CustomTableViewCellDelegate {
 
 private extension TodoListViewController {
 
+    func configureBottomButton(status: TodoListViewStatus) {
+        switch status {
+        case .basic:
+            addBlueButtonView.isHidden = false
+            dirtyIndicatorLabelView.isHidden = true
+            loadingIndicatorView.isHidden = true
+        case .loading:
+            loadingIndicatorView.startAnimating()
+            addBlueButtonView.isHidden = true
+            dirtyIndicatorLabelView.isHidden = true
+            loadingIndicatorView.isHidden = false
+        case .dirty:
+            addBlueButtonView.isHidden = true
+            dirtyIndicatorLabelView.isHidden = false
+            loadingIndicatorView.isHidden = true
+            loadingIndicatorView.stopAnimating()
+        }
+    }
+    
+    func setupDirtyIndicatorView() {
+        dirtyIndicatorLabelView.translatesAutoresizingMaskIntoConstraints = false
+        dirtyIndicatorLabelView.text = "Ошибка загрузки. Показываются локальные данные"
+        dirtyIndicatorLabelView.numberOfLines = 2
+        dirtyIndicatorLabelView.textColor = .tertiaryLabel
+        dirtyIndicatorLabelView.textAlignment = .center
+        let padding: CGFloat = 16
+        
+        view.addSubview(dirtyIndicatorLabelView)
+        
+        NSLayoutConstraint.activate([
+            dirtyIndicatorLabelView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: padding),
+            dirtyIndicatorLabelView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -padding),
+            dirtyIndicatorLabelView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            dirtyIndicatorLabelView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        ])
+    }
+    
+    func setupLoadingIndicator() {
+        loadingIndicatorView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(loadingIndicatorView)
+        
+        NSLayoutConstraint.activate([
+            loadingIndicatorView.widthAnchor.constraint(equalToConstant: 44),
+            loadingIndicatorView.heightAnchor.constraint(equalToConstant: 44),
+            loadingIndicatorView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            loadingIndicatorView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        ])
+    }
+    
     func setupBottomButton() {
-        let imageView = UIImageView(image: UIImage(named: "Plus"))
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.layer.cornerRadius = 22
-        imageView.contentMode = .scaleAspectFit
+        addBlueButtonView.translatesAutoresizingMaskIntoConstraints = false
+        addBlueButtonView = UIImageView(image: UIImage(named: "Plus"))
+        addBlueButtonView.translatesAutoresizingMaskIntoConstraints = false
+        addBlueButtonView.layer.cornerRadius = 22
+        addBlueButtonView.contentMode = .scaleAspectFit
 
-        imageView.layer.shadowColor = UIColor(named: "Blue")?.cgColor
-        imageView.layer.shadowOpacity = 0.3
-        imageView.layer.shadowOffset = CGSize(width: 0, height: 8)
-        imageView.layer.shadowRadius = 20
-        view.addSubview(imageView)
+        addBlueButtonView.layer.shadowColor = UIColor(named: "Blue")?.cgColor
+        addBlueButtonView.layer.shadowOpacity = 0.3
+        addBlueButtonView.layer.shadowOffset = CGSize(width: 0, height: 8)
+        addBlueButtonView.layer.shadowRadius = 20
+        view.addSubview(addBlueButtonView)
 
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(plusButtonTapped))
-        imageView.isUserInteractionEnabled = true
-        imageView.addGestureRecognizer(tapGestureRecognizer)
+        addBlueButtonView.isUserInteractionEnabled = true
+        addBlueButtonView.addGestureRecognizer(tapGestureRecognizer)
 
         NSLayoutConstraint.activate([
-            imageView.widthAnchor.constraint(equalToConstant: 44),
-            imageView.heightAnchor.constraint(equalToConstant: 44),
-            imageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            imageView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+            addBlueButtonView.widthAnchor.constraint(equalToConstant: 44),
+            addBlueButtonView.heightAnchor.constraint(equalToConstant: 44),
+            addBlueButtonView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            addBlueButtonView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
 
@@ -220,4 +281,10 @@ private extension TodoListViewController {
         output?.toggleCompletedTasksVisibility()
     }
 
+}
+
+enum TodoListViewStatus {
+    case basic
+    case loading
+    case dirty
 }

@@ -43,7 +43,7 @@ public struct TodoItem {
 }
 
 public enum Importance: String {
-    case low = "неважная"
-    case normal = "обычная"
-    case high = "важная"
+    case low = "low"
+    case normal = "basic"
+    case high = "important"
 }

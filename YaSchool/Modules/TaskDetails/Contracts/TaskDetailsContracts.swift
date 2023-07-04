@@ -9,6 +9,9 @@ protocol TaskDetailsModuleOutput {
     @MainActor func didAskToShowColorPicker()
     @MainActor func didAskToReloadItems()
     @MainActor func didAskToCloseTaskDetails()
+    @MainActor func didAskToRemoveItem(item: TodoItem)
+    @MainActor func didAskToUpdateItem(item: TodoItem)
+    @MainActor func didAskToSaveItem(item: TodoItem)
 }
 
 protocol TaskDetailsViewInput: AnyObject {
@@ -24,9 +27,4 @@ protocol TaskDetailsViewOutput {
     @MainActor func cancelButtonTapped()
     @MainActor func colorPickerTapped()
 
-}
-
-protocol TaskDetailsInteractorInput {
-    func deleteTask(todoItem: TodoItem)
-    func saveTask(todoItem: TodoItem)
 }

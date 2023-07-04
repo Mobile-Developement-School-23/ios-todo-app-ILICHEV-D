@@ -42,6 +42,27 @@ extension TaskCoordinator: TaskDetailsModuleOutput {
         }
     }
 
+    @MainActor func didAskToRemoveItem(item: TodoItem) {
+        modalNavigationController?.dismiss(animated: true) {
+            self.modalNavigationController = nil
+        }
+        todoListModuleInput?.removeItem(item)
+    }
+    
+    @MainActor func didAskToUpdateItem(item: TodoItem) {
+        modalNavigationController?.dismiss(animated: true) {
+            self.modalNavigationController = nil
+        }
+        todoListModuleInput?.updateItem(item)
+    }
+    
+    @MainActor func didAskToSaveItem(item: TodoItem) {
+        modalNavigationController?.dismiss(animated: true) {
+            self.modalNavigationController = nil
+        }
+        todoListModuleInput?.saveItem(item)
+    }
+    
 }
 
 extension TaskCoordinator: ColorPickerModuleOutput {
