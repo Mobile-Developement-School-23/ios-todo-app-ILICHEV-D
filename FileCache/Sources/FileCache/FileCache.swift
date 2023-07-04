@@ -26,6 +26,8 @@ public final class FileCache: FileCacheType {
     private var todoItems: [TodoItem]
     private let filename: String
     private let fileType: FileType
+    
+    private var isDirty = false
 
     public init(filename: String, fileType: FileType) {
         self.filename = filename
@@ -48,18 +50,33 @@ public final class FileCache: FileCacheType {
         saveToFile()
     }
 
-    public func checkTodoItem(withID id: String) {
+    public func checkTodoItem(withID id: String) -> TodoItem? {
         var item = todoItems.first { $0.id == id }
         item?.isDone.toggle()
         if let item = item {
             add(todoItem: item)
+            return item
         }
+        return nil
     }
 
     public func loadTodoItems() -> [TodoItem] {
         loadFromFile() ?? []
     }
+    
+    public func setItems(_ items: [TodoItem]) {
+        todoItems = items
+        saveToFile()
+    }
 
+    public func setDirty(_ isDirty: Bool) {
+        self.isDirty = isDirty
+    }
+    
+    public func getIsDirty() -> Bool {
+        self.isDirty
+    }
+        
     private func saveToFile() {
         switch fileType {
         case .json:

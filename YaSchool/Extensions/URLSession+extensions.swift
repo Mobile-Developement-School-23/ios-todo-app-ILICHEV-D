@@ -9,14 +9,16 @@ public extension URLSession {
             try await withCheckedThrowingContinuation { continuation in
                 Task {
                     await sessionTask.start(request, on: self) { data, response, error in
-                        guard let data = data, let response = response else {
-                            continuation.resume(throwing: error ?? URLError(.networkConnectionLost))
-                            return
+                        if let error = error {
+                            continuation.resume(throwing: error)
+                        } else if let data = data, let response = response {
+                            continuation.resume(returning: (data, response))
+                        } else {
+                            continuation.resume(throwing: URLError(.cannotLoadFromNetwork))
                         }
-
-                        continuation.resume(returning: (data, response))
                     }
                 }
+                return
             }
         } onCancel: {
             Task { await sessionTask.cancel() }

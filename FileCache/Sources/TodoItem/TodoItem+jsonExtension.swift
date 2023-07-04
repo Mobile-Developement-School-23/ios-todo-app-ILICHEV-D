@@ -1,4 +1,5 @@
 import Foundation
+import UIKit
 
 /**
  Extension for the TodoItem structure for JSON converting
@@ -13,17 +14,16 @@ import Foundation
 extension TodoItem {
 
     public static func parse(json: Any) -> TodoItem? {
-        let dateFormatter = ISO8601DateFormatter()
-
         guard let jsonDict = json as? [String: Any],
               let id = jsonDict["id"] as? String,
               let text = jsonDict["text"] as? String,
-              let isDone = jsonDict["isDone"] as? Bool,
-              let creationDateString = jsonDict["creationDate"] as? String,
-              let creationDate = dateFormatter.date(from: creationDateString)
+              let isDone = jsonDict["done"] as? Bool,
+              let creationDateInt = jsonDict["created_at"] as? Int64
         else {
             return nil
         }
+        
+        let creationDate = Date(timeIntervalSince1970: TimeInterval(integerLiteral: creationDateInt))
 
         let importance: Importance = {
             if let importanceString = jsonDict["importance"] as? String,
@@ -34,15 +34,15 @@ extension TodoItem {
         }()
 
         let deadline: Date? = {
-            if let deadlineString = jsonDict["deadline"] as? String {
-                return dateFormatter.date(from: deadlineString)
+            if let deadlineDateInt = jsonDict["deadline"] as? Int64 {
+                return Date(timeIntervalSince1970: TimeInterval(integerLiteral: deadlineDateInt))
             }
             return nil
         }()
 
         let modificationDate: Date? = {
-            if let modificationDateString = jsonDict["modificationDate"] as? String {
-                return dateFormatter.date(from: modificationDateString)
+            if let modificationDateInt = jsonDict["changed_at"] as? Int64 {
+                return Date(timeIntervalSince1970: TimeInterval(integerLiteral: modificationDateInt))
             }
             return nil
         }()
@@ -67,23 +67,23 @@ extension TodoItem {
     }
 
     public var json: Any {
-        let dateFormatter = ISO8601DateFormatter()
-
         var jsonDict: [String: Any] = [
             "id": id,
             "text": text,
-            "isDone": isDone,
-            "creationDate": dateFormatter.string(from: creationDate)
+            "done": isDone,
+            "created_at": Int(creationDate.timeIntervalSince1970),
+            "last_updated_by": UIDevice.current.identifierForVendor?.uuidString ?? ""
         ]
-
-        if importance != .normal {
-            jsonDict["importance"] = importance.rawValue
-        }
+        
+        jsonDict["importance"] = importance.rawValue
+        
         if let deadline = deadline {
-            jsonDict["deadline"] = dateFormatter.string(from: deadline)
+            jsonDict["deadline"] = Int(deadline.timeIntervalSince1970)
         }
         if let modificationDate = modificationDate {
-            jsonDict["modificationDate"] = dateFormatter.string(from: modificationDate)
+            jsonDict["changed_at"] = Int(modificationDate.timeIntervalSince1970)
+        } else {
+            jsonDict["changed_at"] = Int(creationDate.timeIntervalSince1970)
         }
         if let color = color {
             jsonDict["color"] = color
@@ -92,3 +92,10 @@ extension TodoItem {
     }
 
 }
+//
+//// MARK: - Welcomer
+//public struct Common: Codable {
+//    let revision: Int
+//    let list: [TodoItem]
+//    let status: String
+//}

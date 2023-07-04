@@ -39,9 +39,9 @@ final class TodoItemTests: XCTestCase {
             "text": "text",
             "importance": "важная",
             "deadline": "2023-08-10T12:00:00Z",
-            "isDone": false,
-            "creationDate": "2023-06-10T12:00:00Z",
-            "modificationDate": "2023-07-10T12:00:00Z"
+            "done": false,
+            "created_at": "2023-06-10T12:00:00Z",
+            "changed_at": "2023-07-10T12:00:00Z"
         ]
 
         let todoItem = try XCTUnwrap(TodoItem.parse(json: json))
@@ -59,8 +59,8 @@ final class TodoItemTests: XCTestCase {
         let json: [String: Any] = [
             "id": "1",
             "text": "text",
-            "isDone": false,
-            "creationDate": "2023-06-10T12:00:00Z"
+            "done": false,
+            "created_at": "2023-06-10T12:00:00Z"
         ]
 
         let todoItem = try XCTUnwrap(TodoItem.parse(json: json))
@@ -100,9 +100,9 @@ final class TodoItemTests: XCTestCase {
         XCTAssertEqual(json["id"] as? String, "1")
         XCTAssertEqual(json["text"] as? String, "text")
         XCTAssertEqual(json["deadline"] as? String, "2023-08-10T12:00:00Z")
-        XCTAssertEqual(json["isDone"] as? Bool, false)
-        XCTAssertEqual(json["creationDate"] as? String, "2023-06-10T12:00:00Z")
-        XCTAssertEqual(json["modificationDate"] as? String, "2023-07-10T12:00:00Z")
+        XCTAssertEqual(json["done"] as? Bool, false)
+        XCTAssertEqual(json["created_at"] as? String, "2023-06-10T12:00:00Z")
+        XCTAssertEqual(json["changed_at"] as? String, "2023-07-10T12:00:00Z")
     }
 
     func testTodoItemCSVParsing() {

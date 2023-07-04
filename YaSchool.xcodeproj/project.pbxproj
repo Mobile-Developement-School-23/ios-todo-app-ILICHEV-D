@@ -18,7 +18,10 @@
 		AD6907A42A34946600E32AEA /* YaSchoolTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6907A32A34946600E32AEA /* YaSchoolTests.swift */; };
 		AD6907AE2A34946600E32AEA /* YaSchoolUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6907AD2A34946600E32AEA /* YaSchoolUITests.swift */; };
 		AD6907B02A34946600E32AEA /* YaSchoolUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6907AF2A34946600E32AEA /* YaSchoolUITestsLaunchTests.swift */; };
+		AD8D03472A54AE0D00DCF92F /* TaskDetailsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8D03462A54AE0D00DCF92F /* TaskDetailsPresenter.swift */; };
 		AD96E91B2A516EAC00AC8952 /* URLSession+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD96E91A2A516EAC00AC8952 /* URLSession+extensions.swift */; };
+		AD96E9222A51B10C00AC8952 /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD96E9202A51B10C00AC8952 /* Networking.swift */; };
+		AD96E9252A51CA1300AC8952 /* RevisionStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD96E9242A51CA1300AC8952 /* RevisionStorage.swift */; };
 		ADCF374E2A484057004D8347 /* CustomViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADCF374D2A484057004D8347 /* CustomViewCell.swift */; };
 		ADCF375A2A485B8C004D8347 /* TodoListAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADCF37512A485B8C004D8347 /* TodoListAssembly.swift */; };
 		ADCF375B2A485B8C004D8347 /* TodoListContracts.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADCF37532A485B8C004D8347 /* TodoListContracts.swift */; };
@@ -30,9 +33,7 @@
 		ADCF37652A48A799004D8347 /* CocoaLumberjackSwiftLogBackend in Frameworks */ = {isa = PBXBuildFile; productRef = ADCF37642A48A799004D8347 /* CocoaLumberjackSwiftLogBackend */; };
 		ADDB0D3F2A3EF8D600A8BEBD /* TaskDetailsAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADDB0D362A3EF8D600A8BEBD /* TaskDetailsAssembly.swift */; };
 		ADDB0D402A3EF8D600A8BEBD /* TaskDetailsContracts.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADDB0D382A3EF8D600A8BEBD /* TaskDetailsContracts.swift */; };
-		ADDB0D412A3EF8D600A8BEBD /* TaskDetailsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADDB0D3A2A3EF8D600A8BEBD /* TaskDetailsPresenter.swift */; };
 		ADDB0D422A3EF8D600A8BEBD /* TaskDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADDB0D3C2A3EF8D600A8BEBD /* TaskDetailsViewController.swift */; };
-		ADDB0D432A3EF8D600A8BEBD /* TaskDetailsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADDB0D3E2A3EF8D600A8BEBD /* TaskDetailsInteractor.swift */; };
 		ADDB0D4C2A3EF8F600A8BEBD /* TaskCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADDB0D452A3EF8F500A8BEBD /* TaskCoordinator.swift */; };
 		ADDB0D4E2A3EF8F600A8BEBD /* TaskCoordinatorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADDB0D472A3EF8F500A8BEBD /* TaskCoordinatorType.swift */; };
 		ADDB0D552A3EFB0300A8BEBD /* CoordinateType.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADDB0D542A3EFB0300A8BEBD /* CoordinateType.swift */; };
@@ -82,7 +83,10 @@
 		AD6907A92A34946600E32AEA /* YaSchoolUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = YaSchoolUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD6907AD2A34946600E32AEA /* YaSchoolUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YaSchoolUITests.swift; sourceTree = "<group>"; };
 		AD6907AF2A34946600E32AEA /* YaSchoolUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YaSchoolUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		AD8D03462A54AE0D00DCF92F /* TaskDetailsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskDetailsPresenter.swift; sourceTree = "<group>"; };
 		AD96E91A2A516EAC00AC8952 /* URLSession+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+extensions.swift"; sourceTree = "<group>"; };
+		AD96E9202A51B10C00AC8952 /* Networking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
+		AD96E9242A51CA1300AC8952 /* RevisionStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RevisionStorage.swift; sourceTree = "<group>"; };
 		ADCF374D2A484057004D8347 /* CustomViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomViewCell.swift; sourceTree = "<group>"; };
 		ADCF37512A485B8C004D8347 /* TodoListAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoListAssembly.swift; sourceTree = "<group>"; };
 		ADCF37532A485B8C004D8347 /* TodoListContracts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoListContracts.swift; sourceTree = "<group>"; };
@@ -91,9 +95,7 @@
 		ADCF37592A485B8C004D8347 /* TodoListInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoListInteractor.swift; sourceTree = "<group>"; };
 		ADDB0D362A3EF8D600A8BEBD /* TaskDetailsAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskDetailsAssembly.swift; sourceTree = "<group>"; };
 		ADDB0D382A3EF8D600A8BEBD /* TaskDetailsContracts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskDetailsContracts.swift; sourceTree = "<group>"; };
-		ADDB0D3A2A3EF8D600A8BEBD /* TaskDetailsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskDetailsPresenter.swift; sourceTree = "<group>"; };
 		ADDB0D3C2A3EF8D600A8BEBD /* TaskDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskDetailsViewController.swift; sourceTree = "<group>"; };
-		ADDB0D3E2A3EF8D600A8BEBD /* TaskDetailsInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskDetailsInteractor.swift; sourceTree = "<group>"; };
 		ADDB0D452A3EF8F500A8BEBD /* TaskCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskCoordinator.swift; sourceTree = "<group>"; };
 		ADDB0D472A3EF8F500A8BEBD /* TaskCoordinatorType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskCoordinatorType.swift; sourceTree = "<group>"; };
 		ADDB0D542A3EFB0300A8BEBD /* CoordinateType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinateType.swift; sourceTree = "<group>"; };
@@ -235,9 +237,19 @@
 		AD6907C32A34A7C400E32AEA /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				AD96E9262A52099A00AC8952 /* NetworkingService */,
 				ADDB0D592A3F013E00A8BEBD /* FileCache */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		AD96E9262A52099A00AC8952 /* NetworkingService */ = {
+			isa = PBXGroup;
+			children = (
+				AD96E9202A51B10C00AC8952 /* Networking.swift */,
+				AD96E9242A51CA1300AC8952 /* RevisionStorage.swift */,
+			);
+			path = NetworkingService;
 			sourceTree = "<group>";
 		};
 		ADCF374F2A485B8C004D8347 /* TodoList */ = {
@@ -310,7 +322,6 @@
 				ADDB0D372A3EF8D600A8BEBD /* Contracts */,
 				ADDB0D392A3EF8D600A8BEBD /* Presenter */,
 				ADDB0D3B2A3EF8D600A8BEBD /* View */,
-				ADDB0D3D2A3EF8D600A8BEBD /* Interactor */,
 			);
 			path = TaskDetails;
 			sourceTree = "<group>";
@@ -334,7 +345,7 @@
 		ADDB0D392A3EF8D600A8BEBD /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
-				ADDB0D3A2A3EF8D600A8BEBD /* TaskDetailsPresenter.swift */,
+				AD8D03462A54AE0D00DCF92F /* TaskDetailsPresenter.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -345,14 +356,6 @@
 				ADDB0D3C2A3EF8D600A8BEBD /* TaskDetailsViewController.swift */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		ADDB0D3D2A3EF8D600A8BEBD /* Interactor */ = {
-			isa = PBXGroup;
-			children = (
-				ADDB0D3E2A3EF8D600A8BEBD /* TaskDetailsInteractor.swift */,
-			);
-			path = Interactor;
 			sourceTree = "<group>";
 		};
 		ADDB0D442A3EF8F500A8BEBD /* TaskCoordinator */ = {
@@ -657,24 +660,25 @@
 				ADCF375C2A485B8C004D8347 /* TodoListPresenter.swift in Sources */,
 				ADCF374E2A484057004D8347 /* CustomViewCell.swift in Sources */,
 				ADCF375B2A485B8C004D8347 /* TodoListContracts.swift in Sources */,
+				AD96E9222A51B10C00AC8952 /* Networking.swift in Sources */,
 				AD69078D2A34946500E32AEA /* AppDelegate.swift in Sources */,
 				ADDB0D4C2A3EF8F600A8BEBD /* TaskCoordinator.swift in Sources */,
 				ADFF77C92A4347A3001F3F31 /* String+extensions.swift in Sources */,
 				AD96E91B2A516EAC00AC8952 /* URLSession+extensions.swift in Sources */,
 				ADCF375A2A485B8C004D8347 /* TodoListAssembly.swift in Sources */,
-				ADDB0D432A3EF8D600A8BEBD /* TaskDetailsInteractor.swift in Sources */,
 				ADDB0D5E2A3F013E00A8BEBD /* FileCacheAssembly.swift in Sources */,
 				AD69078F2A34946500E32AEA /* SceneDelegate.swift in Sources */,
 				ADFF77C32A43371C001F3F31 /* ColorPickerPresenter.swift in Sources */,
 				ADCF375E2A485B8C004D8347 /* TodoListInteractor.swift in Sources */,
 				ADDB0D552A3EFB0300A8BEBD /* CoordinateType.swift in Sources */,
+				AD8D03472A54AE0D00DCF92F /* TaskDetailsPresenter.swift in Sources */,
 				ADDB0D402A3EF8D600A8BEBD /* TaskDetailsContracts.swift in Sources */,
 				ADDB0D3F2A3EF8D600A8BEBD /* TaskDetailsAssembly.swift in Sources */,
 				ADFF77C42A43371C001F3F31 /* ColorPickerViewController.swift in Sources */,
 				AD3E75A62A3F2CC300985ECA /* Date+extensions.swift in Sources */,
+				AD96E9252A51CA1300AC8952 /* RevisionStorage.swift in Sources */,
 				ADFF77C22A43371C001F3F31 /* ColorPickerContracts.swift in Sources */,
 				ADFF77B32A4336C6001F3F31 /* UIColor+extenstions.swift in Sources */,
-				ADDB0D412A3EF8D600A8BEBD /* TaskDetailsPresenter.swift in Sources */,
 				ADCF375D2A485B8C004D8347 /* TodoListViewController.swift in Sources */,
 				ADDB0D4E2A3EF8F600A8BEBD /* TaskCoordinatorType.swift in Sources */,
 				ADFF77C12A43371C001F3F31 /* ColorPickerAssembly.swift in Sources */,
@@ -783,7 +787,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_STRICT_CONCURRENCY = minimal;
 			};
 			name = Debug;
 		};
@@ -837,7 +841,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
-				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_STRICT_CONCURRENCY = minimal;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
