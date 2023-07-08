@@ -20,17 +20,37 @@ public final class FileCache: FileCacheType {
     }
 
     public func add(todoItem: TodoItem) {
+        var shouldUpdate = false
+        var updateIndex = 0
         if let index = todoItems.firstIndex(where: { $0.id == todoItem.id }) {
             todoItems[index] = todoItem
+            updateIndex = index
+            shouldUpdate = true
         } else {
             todoItems.append(todoItem)
         }
-        saveToFile()
+        
+        switch fileType {
+        case .json, .csv:
+            saveToFile()
+        case .sqlite:
+            shouldUpdate ? update(todoItems[updateIndex]) : insert(todoItem)
+        }
     }
 
     public func removeTodoItem(withID id: String) {
+        let item = todoItems.first { $0.id == id }
         todoItems.removeAll { $0.id == id }
-        saveToFile()
+        switch fileType {
+        case .json, .csv:
+            saveToFile()
+        case .sqlite:
+            if let item = item {
+                delete(item)
+            } else {
+                saveToFile()
+            }
+        }
     }
 
     public func checkTodoItem(withID id: String) -> TodoItem? {

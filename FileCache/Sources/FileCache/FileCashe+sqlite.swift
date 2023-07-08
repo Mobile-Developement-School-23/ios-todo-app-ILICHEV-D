@@ -18,7 +18,7 @@ extension FileCache {
         }
     }
     
-    func createTable() {
+    func initTable() {
         var createTableStatement: OpaquePointer? = nil
         let createTableQuery = "CREATE TABLE IF NOT EXISTS TodoItems (id TEXT PRIMARY KEY, text TEXT, done INTEGER, created_at INTEGER, last_updated_by TEXT, importance TEXT, deadline INTEGER, changed_at INTEGER, color TEXT);"
         
@@ -33,46 +33,105 @@ extension FileCache {
     }
     
     func save() {
-        createTable()
+        initTable()
         cleanTable()
-                
+        
         for item in todoItems {
-            var replaceStatement: OpaquePointer? = nil
-            let replaceStatementString = "REPLACE INTO TodoItems (id, text, done, created_at, last_updated_by, importance, deadline, changed_at, color) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);"
-            
-            if sqlite3_prepare_v2(db, replaceStatementString, -1, &replaceStatement, nil) == SQLITE_OK {
-                sqlite3_bind_text(replaceStatement, 1, (item.id as NSString).utf8String, -1, nil)
-                sqlite3_bind_text(replaceStatement, 2, (item.text as NSString).utf8String, -1, nil)
-                sqlite3_bind_int(replaceStatement, 3, item.isDone ? 1 : 0)
-                sqlite3_bind_int64(replaceStatement, 4, Int64(item.creationDate.timeIntervalSince1970))
-                sqlite3_bind_text(replaceStatement, 5, (UIDevice.current.identifierForVendor?.uuidString as NSString?)?.utf8String, -1, nil)
-                sqlite3_bind_text(replaceStatement, 6, (item.importance.rawValue as NSString).utf8String, -1, nil)
-                if let deadline = item.deadline {
-                    sqlite3_bind_int64(replaceStatement, 7, Int64(deadline.timeIntervalSince1970))
-                } else {
-                    sqlite3_bind_null(replaceStatement, 7)
-                }
-                if let modificationDate = item.modificationDate {
-                    sqlite3_bind_int64(replaceStatement, 8, Int64(modificationDate.timeIntervalSince1970))
-                } else {
-                    sqlite3_bind_int64(replaceStatement, 8, Int64(item.creationDate.timeIntervalSince1970))
-                }
-                sqlite3_bind_text(replaceStatement, 9, (item.color as NSString?)?.utf8String, -1, nil)
-                
-                if sqlite3_step(replaceStatement) != SQLITE_DONE {
-                    print("Failed to replace item: \(item.id)")
-                }
-//                else {
-//                    print("Could not replace row.")
-//                }
-                
-            } else {
-                print("Replace error")
-            }
-            
-            sqlite3_finalize(replaceStatement)
+            insert(item)
         }
     }
+    
+    func insert(_ item: TodoItem) {
+        var insertStatement: OpaquePointer? = nil
+        let insertStatementString = "INSERT INTO TodoItems (id, text, done, created_at, last_updated_by, importance, deadline, changed_at, color) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);"
+        
+        if sqlite3_prepare_v2(db, insertStatementString, -1, &insertStatement, nil) == SQLITE_OK {
+            sqlite3_bind_text(insertStatement, 1, (item.id as NSString).utf8String, -1, nil)
+            sqlite3_bind_text(insertStatement, 2, (item.text as NSString).utf8String, -1, nil)
+            sqlite3_bind_int(insertStatement, 3, item.isDone ? 1 : 0)
+            sqlite3_bind_int64(insertStatement, 4, Int64(item.creationDate.timeIntervalSince1970))
+            sqlite3_bind_text(insertStatement, 5, (UIDevice.current.identifierForVendor?.uuidString as NSString?)?.utf8String, -1, nil)
+            sqlite3_bind_text(insertStatement, 6, (item.importance.rawValue as NSString).utf8String, -1, nil)
+            if let deadline = item.deadline {
+                sqlite3_bind_int64(insertStatement, 7, Int64(deadline.timeIntervalSince1970))
+            } else {
+                sqlite3_bind_null(insertStatement, 7)
+            }
+            if let modificationDate = item.modificationDate {
+                sqlite3_bind_int64(insertStatement, 8, Int64(modificationDate.timeIntervalSince1970))
+            } else {
+                sqlite3_bind_int64(insertStatement, 8, Int64(item.creationDate.timeIntervalSince1970))
+            }
+            sqlite3_bind_text(insertStatement, 9, (item.color as NSString?)?.utf8String, -1, nil)
+            
+            if sqlite3_step(insertStatement) != SQLITE_DONE {
+                print("Failed to insert item: \(item.id)")
+            } else {
+                print("Successfully inserted item: \(item.id)")
+            }
+            
+        } else {
+            print("INSERT statement could not be prepared.")
+        }
+        
+        sqlite3_finalize(insertStatement)
+    }
+    
+    func update(_ item: TodoItem) {
+        var updateStatement: OpaquePointer? = nil
+        let updateStatementString = "UPDATE TodoItems SET text = ?, done = ?, created_at = ?, last_updated_by = ?, importance = ?, deadline = ?, changed_at = ?, color = ? WHERE id = ?;"
+        
+        if sqlite3_prepare_v2(db, updateStatementString, -1, &updateStatement, nil) == SQLITE_OK {
+            sqlite3_bind_text(updateStatement, 1, (item.text as NSString).utf8String, -1, nil)
+            sqlite3_bind_int(updateStatement, 2, item.isDone ? 1 : 0)
+            sqlite3_bind_int64(updateStatement, 3, Int64(item.creationDate.timeIntervalSince1970))
+            sqlite3_bind_text(updateStatement, 4, (UIDevice.current.identifierForVendor?.uuidString as NSString?)?.utf8String, -1, nil)
+            sqlite3_bind_text(updateStatement, 5, (item.importance.rawValue as NSString).utf8String, -1, nil)
+            if let deadline = item.deadline {
+                sqlite3_bind_int64(updateStatement, 6, Int64(deadline.timeIntervalSince1970))
+            } else {
+                sqlite3_bind_null(updateStatement, 6)
+            }
+            if let modificationDate = item.modificationDate {
+                sqlite3_bind_int64(updateStatement, 7, Int64(modificationDate.timeIntervalSince1970))
+            } else {
+                sqlite3_bind_int64(updateStatement, 7, Int64(item.creationDate.timeIntervalSince1970))
+            }
+            sqlite3_bind_text(updateStatement, 8, (item.color as NSString?)?.utf8String, -1, nil)
+            sqlite3_bind_text(updateStatement, 9, (item.id as NSString).utf8String, -1, nil)
+            
+            if sqlite3_step(updateStatement) != SQLITE_DONE {
+                print("Failed to update item: \(item.id)")
+            } else {
+                print("Successfully updated item: \(item.id)")
+            }
+        } else {
+            print("UPDATE statement could not be prepared.")
+        }
+        
+        sqlite3_finalize(updateStatement)
+    }
+    
+    func delete(_ item: TodoItem) {
+        var deleteStatement: OpaquePointer? = nil
+        let deleteStatementString = "DELETE FROM TodoItems WHERE id = ?;"
+        
+        if sqlite3_prepare_v2(db, deleteStatementString, -1, &deleteStatement, nil) == SQLITE_OK {
+            sqlite3_bind_text(deleteStatement, 1, (item.id as NSString).utf8String, -1, nil)
+            
+            if sqlite3_step(deleteStatement) != SQLITE_DONE {
+                print("Failed to delete item: \(item.id)")
+            } else {
+                print("Successfully deleted item: \(item.id)")
+            }
+            
+        } else {
+            print("DELETE statement could not be prepared.")
+        }
+        
+        sqlite3_finalize(deleteStatement)
+    }
+    
     
     func load() -> [TodoItem]? {
         let selectQuery = "SELECT id, text, done, created_at, last_updated_by, importance, deadline, changed_at, color FROM TodoItems;"
