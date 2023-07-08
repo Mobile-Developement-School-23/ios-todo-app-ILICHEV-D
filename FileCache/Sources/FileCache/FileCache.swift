@@ -1,38 +1,21 @@
-// 〉Содержит закрытую для внешнего изменения, но открытую для получения коллекцию TodoItem
-// 〉Содержит функцию добавления новой задачи
-// 〉Содержит функцию удаления задачи (на основе id)
-// 〉Содержит функцию сохранения всех дел в файл
-// 〉Содержит функцию загрузки всех дел из файла
-// 〉Можем иметь несколько разных файлов
-// 〉Предусмотреть механизм защиты от дублирования задач (сравниванием id)
-
 import Foundation
 import TodoItem
 
-/**
- A class for working with TodoItems
-
- - Contains a TodoItem collection closed for external modification, but open for receiving
- - Contains a function for adding a new task
- - Contains the task deletion function (based on id)
- - Contains the function of saving all cases to a file
- - Contains the function of downloading all cases from a file
- - We can have several different files
- - Provide a mechanism to protect against duplication of tasks (by comparing IDs)
- */
-
 public final class FileCache: FileCacheType {
 
-    private var todoItems: [TodoItem]
+    var todoItems: [TodoItem]
     private let filename: String
     private let fileType: FileType
     
     private var isDirty = false
+    
+    var db: OpaquePointer?
 
     public init(filename: String, fileType: FileType) {
         self.filename = filename
         self.todoItems = []
         self.fileType = fileType
+        self.db = openDatabase(filename: filename)
         _ = loadFromFile()
     }
 
@@ -83,6 +66,8 @@ public final class FileCache: FileCacheType {
             saveJSONToFile()
         case .csv:
             saveCSVToFile()
+        case .sqlite:
+            save()
         }
     }
 
@@ -92,6 +77,8 @@ public final class FileCache: FileCacheType {
             return loadJSONFromFile()
         case .csv:
             return loadCSVFromFile()
+        case .sqlite:
+            return load()
         }
     }
 
@@ -153,7 +140,7 @@ public final class FileCache: FileCacheType {
         return []
     }
 
-    private func fileURL() -> URL? {
+    func fileURL() -> URL? {
         FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent(filename)
     }
 
@@ -164,4 +151,5 @@ public final class FileCache: FileCacheType {
 public enum FileType {
     case json
     case csv
+    case sqlite
 }

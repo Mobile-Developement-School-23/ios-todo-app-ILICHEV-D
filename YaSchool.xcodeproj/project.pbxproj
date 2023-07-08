@@ -10,6 +10,7 @@
 		4C629712F1C4F0A82814B6B0 /* Pods_YaSchool_YaSchoolUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1DF667CFAAC6FC2B3F138DC /* Pods_YaSchool_YaSchoolUITests.framework */; };
 		8EE2EDF1AE72A0063BE7DC61 /* Pods_YaSchool.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F580636ABA4DC807BA1E8D7D /* Pods_YaSchool.framework */; };
 		AD0C919F2A48BEAB001250D6 /* FileCache in Frameworks */ = {isa = PBXBuildFile; productRef = AD0C919E2A48BEAB001250D6 /* FileCache */; };
+		AD12705D2A59822A00FFB25E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD12705C2A59822A00FFB25E /* ViewController.swift */; };
 		AD3E75A62A3F2CC300985ECA /* Date+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD3E75A52A3F2CC300985ECA /* Date+extensions.swift */; };
 		AD69078D2A34946500E32AEA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD69078C2A34946500E32AEA /* AppDelegate.swift */; };
 		AD69078F2A34946500E32AEA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD69078E2A34946500E32AEA /* SceneDelegate.swift */; };
@@ -71,6 +72,7 @@
 		7F81FCEBE984D2A085620DD9 /* Pods-YaSchool.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YaSchool.release.xcconfig"; path = "Target Support Files/Pods-YaSchool/Pods-YaSchool.release.xcconfig"; sourceTree = "<group>"; };
 		A6A9DE602E3EDCB584F08C0C /* Pods-YaSchool.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YaSchool.debug.xcconfig"; path = "Target Support Files/Pods-YaSchool/Pods-YaSchool.debug.xcconfig"; sourceTree = "<group>"; };
 		AD0C919D2A48BEA2001250D6 /* FileCache */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = FileCache; sourceTree = "<group>"; };
+		AD12705C2A59822A00FFB25E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		AD3E75A52A3F2CC300985ECA /* Date+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+extensions.swift"; sourceTree = "<group>"; };
 		AD6907892A34946500E32AEA /* YaSchool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YaSchool.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD69078C2A34946500E32AEA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -311,6 +313,7 @@
 				ADFF77B62A43371C001F3F31 /* ColorPicker */,
 				ADDB0D342A3EF8D600A8BEBD /* TaskDetails */,
 				ADCF374D2A484057004D8347 /* CustomViewCell.swift */,
+				AD12705C2A59822A00FFB25E /* ViewController.swift */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -678,6 +681,7 @@
 				AD3E75A62A3F2CC300985ECA /* Date+extensions.swift in Sources */,
 				AD96E9252A51CA1300AC8952 /* RevisionStorage.swift in Sources */,
 				ADFF77C22A43371C001F3F31 /* ColorPickerContracts.swift in Sources */,
+				AD12705D2A59822A00FFB25E /* ViewController.swift in Sources */,
 				ADFF77B32A4336C6001F3F31 /* UIColor+extenstions.swift in Sources */,
 				ADCF375D2A485B8C004D8347 /* TodoListViewController.swift in Sources */,
 				ADDB0D4E2A3EF8F600A8BEBD /* TaskCoordinatorType.swift in Sources */,
