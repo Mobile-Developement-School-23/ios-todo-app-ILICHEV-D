@@ -76,7 +76,7 @@ extension TaskCoordinator: ColorPickerModuleOutput {
 private extension TaskCoordinator {
 
     @MainActor func buildEntryPoint() {
-        let module = TodoListAssembly().build(moduleOutput: self, filename: "example", type: .json)
+        let module = TodoListAssembly().build(moduleOutput: self, filename: "example", type: .sqlite)
         todoListModuleInput = module.1
         self.navigationController = UINavigationController(rootViewController: module.0)
     }
@@ -87,7 +87,7 @@ private extension TaskCoordinator {
     }
 
     @MainActor func showTaskDetails(task: TodoItem?) {
-        let module = TaskDetailsAssembly().build(moduleOutput: self, task: task, filename: "example", type: .json)
+        let module = TaskDetailsAssembly().build(moduleOutput: self, task: task, filename: "example", type: .sqlite)
         taskDetailsModuleInput = module.1
         modalNavigationController = UINavigationController(rootViewController: module.0)
         if let modalNavigationController = modalNavigationController {
