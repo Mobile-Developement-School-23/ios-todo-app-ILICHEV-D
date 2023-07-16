@@ -16,7 +16,7 @@ public struct TodoItem {
     public var isDone: Bool
     public let text: String
     public let importance: Importance
-    public let deadline: Date?
+    public var deadline: Date?
     public let creationDate: Date
     public let modificationDate: Date?
     public var color: String?
